@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change user preferences form</title>
+    
+</head>
+<body>
+    <form action="" method="POST">
+        <h2>preferences</h2>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Email" title="Please enter a valid email address" required>
+
+        <label for="altemail">Alternate Email</label>
+        <input type="email" id="altemail" name="altemail" placeholder="Alternate Email" title="Please enter a valid email address" required>
+
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" placeholder="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="Please enter a valid phone number" required>
+
+        <label for="password">Reset password</label>
+        <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number" required>
+
+        <label for="mfaCode">MFA Code:</label><br>
+        <input type="text" id="mfaCode" name="mfaCode">
+
+        <input type="update" value="send verification">
+
+        <button> update</button>
+        
+        <a href="account.html">back to account</a>
+    </form>
+</body>
+</html>
