@@ -7,14 +7,14 @@
     
 </head>
 <body>
-    <form action="" method="POST">
+    <form action="register.php" method="POST">
         <h2>register</h2>
 
         <label for="fname">first name</label>
         <input type="text" id="Fname" name="Fname" required>
 
         <label for="mname">middle name</label>
-        <input type="text" id="Mname" name="Mname" required>
+        <input type="text" id="Mname" name="Mname">
 
         <label for="lname">last name</label>
         <input type="text" id="Lname" name="Lname" required>
@@ -23,7 +23,7 @@
         <input type="email" id="email" name="email" placeholder="Email" title="Please enter a valid email address"required>
 
         <label for="altemail">Alternate email</label>
-        <input type="email" id="altemail" name="altemail" placeholder="alternate email" title="Please enter a valid email address"required>
+        <input type="email" id="altemail" name="altemail" placeholder="alternate email" title="Please enter a valid email address">
 
         <label for="password">Password</label>
         <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number" required>
