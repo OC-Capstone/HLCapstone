@@ -1,0 +1,85 @@
+:root {
+  --infomain: rgba(114, 57, 234, 1);
+  --inter-body-medium-14-regular-font-family: "Inter", Helvetica;
+  --inter-body-medium-14-regular-font-weight: 400;
+  --inter-body-medium-14-regular-font-size: 14px;
+  --inter-body-medium-14-regular-letter-spacing: 0px;
+  --inter-body-medium-14-regular-line-height: 150%;
+  --inter-body-medium-14-regular-font-style: normal;
+  --inter-body-large-16-regular-font-family: "Inter", Helvetica;
+  --inter-body-large-16-regular-font-weight: 400;
+  --inter-body-large-16-regular-font-size: 16px;
+  --inter-body-large-16-regular-letter-spacing: 0px;
+  --inter-body-large-16-regular-line-height: 150%;
+  --inter-body-large-16-regular-font-style: normal;
+  --inter-body-medium-14-semibold-font-family: "Inter", Helvetica;
+  --inter-body-medium-14-semibold-font-weight: 600;
+  --inter-body-medium-14-semibold-font-size: 14px;
+  --inter-body-medium-14-semibold-letter-spacing: 0px;
+  --inter-body-medium-14-semibold-line-height: 150%;
+  --inter-body-medium-14-semibold-font-style: normal;
+  --inter-body-small-12-medium-font-family: "Inter", Helvetica;
+  --inter-body-small-12-medium-font-weight: 500;
+  --inter-body-small-12-medium-font-size: 12px;
+  --inter-body-small-12-medium-letter-spacing: 0px;
+  --inter-body-small-12-medium-line-height: 150%;
+  --inter-body-small-12-medium-font-style: normal;
+  --product-theme-neutral-10: rgba(255, 255, 255, 1);
+  --product-theme-neutral-20: rgba(245, 245, 245, 1);
+  --product-theme-neutral-30: rgba(237, 237, 237, 1);
+  --product-theme-neutral-40: rgba(214, 214, 214, 1);
+  --product-theme-neutral-60: rgba(135, 135, 135, 1);
+  --product-theme-neutral-80: rgba(56, 56, 56, 1);
+  --product-theme-neutral-100: rgba(16, 16, 16, 1);
+  --product-theme-neutral-10-duplicate: rgba(255, 255, 255, 1);
+  --product-theme-neutral-100-duplicate: rgba(16, 16, 16, 1);
+  --product-theme-neutral-20-duplicate: rgba(245, 245, 245, 1);
+  --product-theme-neutral-60-duplicate: rgba(135, 135, 135, 1);
+  --product-theme-neutral-30-duplicate: rgba(237, 237, 237, 1);
+  --colors-design-theme-light-blues-blue: rgba(34, 104, 209, 1);
+  --colors-design-theme-light-grey-500: rgba(33, 33, 35, 1);
+  --colors-design-theme-light-grey-100: rgba(252, 252, 252, 1);
+  --colors-design-theme-light-blues-blue-100: rgba(200, 207, 218, 1);
+}
+
+/*
+
+To enable a theme in your HTML, simply add one of the following data attributes to an HTML element, like so:
+
+<body data-product-theme-mode="light-mode">
+	<!-- the rest of your content -->
+</body>
+
+You can apply the theme on any DOM node, not just the `body`
+
+*/
+
+[data-product-theme-mode="light-mode"] {
+  --product-theme-neutral-10: rgba(255, 255, 255, 1);
+  --product-theme-neutral-20: rgba(245, 245, 245, 1);
+  --product-theme-neutral-30: rgba(237, 237, 237, 1);
+  --product-theme-neutral-40: rgba(214, 214, 214, 1);
+  --product-theme-neutral-60: rgba(135, 135, 135, 1);
+  --product-theme-neutral-80: rgba(56, 56, 56, 1);
+  --product-theme-neutral-100: rgba(16, 16, 16, 1);
+  --product-theme-neutral-10-duplicate: rgba(255, 255, 255, 1);
+  --product-theme-neutral-100-duplicate: rgba(16, 16, 16, 1);
+  --product-theme-neutral-20-duplicate: rgba(245, 245, 245, 1);
+  --product-theme-neutral-60-duplicate: rgba(135, 135, 135, 1);
+  --product-theme-neutral-30-duplicate: rgba(237, 237, 237, 1);
+}
+
+[data-product-theme-mode="dark-mode"] {
+  --product-theme-neutral-10: rgba(16, 16, 16, 1);
+  --product-theme-neutral-20: rgba(36, 36, 36, 1);
+  --product-theme-neutral-30: rgba(56, 56, 56, 1);
+  --product-theme-neutral-40: rgba(96, 96, 96, 1);
+  --product-theme-neutral-60: rgba(194, 194, 194, 1);
+  --product-theme-neutral-80: rgba(237, 237, 237, 1);
+  --product-theme-neutral-100: rgba(255, 255, 255, 1);
+  --product-theme-neutral-10-duplicate: rgba(16, 16, 16, 1);
+  --product-theme-neutral-100-duplicate: rgba(255, 255, 255, 1);
+  --product-theme-neutral-20-duplicate: rgba(36, 36, 36, 1);
+  --product-theme-neutral-60-duplicate: rgba(194, 194, 194, 1);
+  --product-theme-neutral-30-duplicate: rgba(56, 56, 56, 1);
+}
