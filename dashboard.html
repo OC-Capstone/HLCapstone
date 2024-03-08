@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body> 
+
+
+   <a href="#" class="logout-button" onclick="logout()">
+    <i class="fas fa-sign-out-alt"></i>
+    </a>
+
+    <label for="nav-sidebar" class="nav-icon">&#9776;</label>
+
+    <div class="bar"></div>
+
+    <nav class="menu">
+        <ul>
+            <li><a href=""></a></li><!--Cade add anything going inside you hamburger menu
+                                        using this format-->
+        </ul>
+    </nav>
+
+    <h1 class="center-heading" id="welcomeMessage">Welcome Back, </h1>
+    <h1 class="title" id="title">Secure Document Vault </h1>
+    <p  class="last-logged-in" id="last-logged-in">Last Logged in: </p>
+    <p  class="last-updated" id="lastUpdated">Last Updated: </p>
+
+
+    <!--outline -->
+    <div class="outline">
+        <h1 class="vault-setup" id="vault-setup">Vault Setup</h1>
+    </div>
+
+    <!--graph space-->
+    <div class="graph"></div>
+   
+
+    <!--add css for graph space-->
+
+    </div>
+
+    <ul-buttons class="buttons-dashboard">
+         <!--add js for button functionality on each button som1-->
+        <li> <p id="partingMessages">Parting<br>  Messages</p>
+            <button class="partingMessages">B1</button>
+        </li>
+
+        <li>  <p id="petWishes">Pet<br>  Wishes </p>
+            <button class="petWishes">B2</button></li>
+
+        <li> <p id="funeralPref">Funeral <br> Preferences </p>
+            <button class="funeralButton">B3</button>
+        </li>
+    </ul-buttons>
+
+    <!--for each button it should be somewthing like...
+    <script>
+        function redirectToPreferences() {
+            window.location.href = "funeralPreferences.html";
+        }
+    </script>
+    in the js whenever someone creates it this is just to help ^^
+    -->
+</body>
+</html>
