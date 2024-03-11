@@ -1,0 +1,234 @@
+.frame {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.frame .main-navigation-wrapper {
+  background-image: url(./img/side-nav-bg.svg);
+  background-size: 100% 100%;
+  width: 451px;
+  height: 1326px;
+}
+
+.frame .main-navigation {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  height: 670px;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 24px 16px;
+  position: relative;
+  top: 2px;
+  background-color: var(--product-theme-neutral-10);
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-color: var(--product-theme-neutral-30);
+}
+
+.frame .navigation-header {
+  align-items: center;
+  justify-content: space-around;
+  gap: 24px;
+  flex: 0 0 auto;
+  display: flex;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+}
+
+.frame .account {
+  display: flex;
+  width: 418px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  position: relative;
+  align-self: stretch;
+}
+
+.frame .avatar-label {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.frame .avatar {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.frame .name-email {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.frame .text-wrapper {
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: var(--inter-body-medium-14-regular-font-family);
+  font-weight: var(--inter-body-medium-14-regular-font-weight);
+  color: var(--product-theme-neutral-100);
+  font-size: var(--inter-body-medium-14-regular-font-size);
+  letter-spacing: var(--inter-body-medium-14-regular-letter-spacing);
+  line-height: var(--inter-body-medium-14-regular-line-height);
+  white-space: nowrap;
+  font-style: var(--inter-body-medium-14-regular-font-style);
+}
+
+.frame .div {
+  position: relative;
+  width: fit-content;
+  font-family: var(--inter-body-medium-14-regular-font-family);
+  font-weight: var(--inter-body-medium-14-regular-font-weight);
+  color: var(--product-theme-neutral-60);
+  font-size: var(--inter-body-medium-14-regular-font-size);
+  letter-spacing: var(--inter-body-medium-14-regular-letter-spacing);
+  line-height: var(--inter-body-medium-14-regular-line-height);
+  white-space: nowrap;
+  font-style: var(--inter-body-medium-14-regular-font-style);
+}
+
+.frame .icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.frame .navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  flex: 1;
+  align-self: stretch;
+  width: 100%;
+  flex-grow: 1;
+  margin-left: -3px;
+  margin-right: -3px;
+  background-color: #ffffff;
+  border-left-width: 3px;
+  border-left-style: solid;
+  border-color: #a20e2ad9;
+}
+
+.frame .menu-item {
+  display: flex;
+  width: 434px;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  position: relative;
+  flex: 0 0 auto;
+  margin-right: -10px;
+  background-color: #a20e2ad9;
+}
+
+.frame .left-content {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+  flex: 1;
+  flex-grow: 1;
+}
+
+.frame .icon-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  flex: 1;
+  flex-grow: 1;
+}
+
+.frame .img {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.frame .label {
+  position: relative;
+  flex: 1;
+  margin-top: -1px;
+  font-family: "Inter-ExtraBold Italic", Helvetica;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--product-theme-neutral-10);
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+.frame .div-2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  position: relative;
+  flex: 1;
+  align-self: stretch;
+  width: 100%;
+  flex-grow: 1;
+  background-color: var(--product-theme-neutral-10-duplicate);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.frame .label-2 {
+  position: relative;
+  flex: 1;
+  margin-top: -1px;
+  font-family: "Inter-Italic", Helvetica;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--product-theme-neutral-100);
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+.frame .navigation-2 {
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  flex-grow: 1;
+  display: flex;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+}
+
+.frame .title {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.frame .text-wrapper-2 {
+  position: relative;
+  flex: 1;
+  margin-top: -1px;
+  font-family: "Inter-SemiBold Italic", Helvetica;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--product-theme-neutral-100);
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 21px;
+}
