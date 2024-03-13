@@ -20,7 +20,6 @@
 
 
     .center-heading {
-    text-align: align;
     font-family: Arial, sans-serif;
     top: 90px; 
     position: relative;
@@ -82,7 +81,7 @@
     }
 
     .last-logged-in {
-    text-align: align;
+    text-align: center;
     font-family: Arial, sans-serif;
     font-size: 22px;
     margin-top: 95px;
@@ -90,7 +89,7 @@
     }
 
     .last-updated {
-    text-align: align;
+    text-align: center;
     font-family: Arial, sans-serif;
     font-size: 12px;
     margin-left: 485px;
@@ -99,9 +98,10 @@
     }
 
     .buttons-dashboard {
-    text-align: center;
+        
+    text-align: relative;
     display: flex;
-    justify-content: space-evenly; 
+    justify-content: center; 
     align-items: center; 
     list-style-type: none;
     padding: 0;
@@ -112,7 +112,7 @@
 }
 
 .buttons-dashboard li {
-    margin-right: 10px; 
+    margin-right: 100px; 
 }
 
 .buttons-dashboard li:last-child {
