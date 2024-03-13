@@ -7,13 +7,14 @@
   <!-- Include Tailwind CSS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
+<body class="">
   <!-- Flex container to center the form in the middle of the page -->
-  <div class="flex flex-col justify-center items-center h-screen bg-gray-300">
+  <img src="../res/LoginPagebg.png" alt="bg" class="bg-gray-900 absolute inset-0 z-0 w-full h-full object-cover">
+  <div class="flex flex-col justify-center items-center h-screen">
 
-    <h2 class="text-3xl font-bold text-black">SECURE DOCUMENT</h2>
+    <h2 class="text-3xl font-bold text-black z-10">SECURE DOCUMENT</h2>
     <!-- Set a max-width to match the image size and remove margin -->
-    <form action="login.php" method="POST" class="bg-contain bg-no-repeat bg-center bg-gradient-to-r from-gray-500 to-gray-600 p-8" style="background-image: url('../res/bgloginV.png'); max-width: 450px; width: 100%; max-height: 550px; height: 100%;">
+    <form action="login.php" method="POST" class=" bg-contain bg-no-repeat bg-center px-8 z-10 py-8" style="background-image: url('../res/bgloginV.png'); max-width: 450px; width: 100%; max-height: 550px; height: 100%;">
       <img src="../res/SDVHLNoWords.png" alt="logo" class="w-20 h-30 mx-auto">
       <label class="block text-center text-black text-3xl font-bold mb-2">Hergott Law</label>
       <label class="block text-white text-3xl font-bold mb-2" for="Email">
@@ -23,13 +24,13 @@
         <label class="block text-white text-sm font-bold mb-2" for="Email">
           Email
         </label>
-        <input class="shadow border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="Email" type="text" placeholder="Email" name="email" required>
+        <input class="shadow border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="Email" type="text" placeholder="Email" name="email" required>
       </div>
       <div class="mb-6">
         <label class="block text-white text-sm font-bold mb-2" for="password">
           Password
         </label>
-        <input class="shadow border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="password" name="password" required>
+        <input class="shadow border rounded w-full py-2 px-3 text-black mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="password" name="password" required>
       </div>
       <div class="flex flex-col items-center">
         <input class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 w-full rounded focus:outline-none focus:shadow-outline" type="submit" value="Sign In">
