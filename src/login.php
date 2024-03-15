@@ -58,13 +58,34 @@ if ($row_count == 0) {
 // Fetch the last_login value
     if ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
         $last_login = $row['last_login'];
+        sqlsrv_commit($conn);
+        $sql = "UPDATE USERS SET last_login = GETDATE() WHERE email = ?";
+        $params = array($email);
+        echo '<br>'. $email .'<br>';
+        $stmt = sqlsrv_query($conn, $sql, $params);
+        echo $sql .'<br>';
+
+        if ($stmt === false) {
+            die(print_r(sqlsrv_errors(), true));
+        } else {
+            echo "Update successful!";
+        }
+
         if ($last_login instanceof DateTime) {
             // Set cookies with retrieved values
             setcookie('last_login', $last_login->format('Y-m-d H:i:s'), time() + 3600, "/");
             setcookie('email', $email, time() + 3600, "/");
+            
+            echo  '<br>' . $last_login->format('Y-m-d H:i:s') . '<br>';
+            $now = new DateTime('now', new DateTimeZone('UTC')); // Current date and time in UTC
+            $interval = $last_login->diff($now); // Difference between dates
+            echo $interval->format('%R%a days') . '<br>';
+            echo $now->format('Y-m-d H:i:s');
         } else {
             echo "Failed to fetch last login!";
-        }   
+        } 
+        header('Location: dashboard.php');
+        exit();  
     }
 }
 ?>
