@@ -7,6 +7,13 @@ $lname = $_POST['lname'];
 $email = $_POST['email'];
 $altEmail = $_POST['altemail'];
 $password = $_POST['password'];
+$verifypassword = $_POST['verifypassword'];
+
+if ($password != $verifypassword) {
+	echo "Passwords do not match";
+	exit();
+}
+
 try {
 	$conn = new PDO("sqlsrv:server = tcp:hergott.database.windows.net,1433; Database = Hergott", $DBUSER, $DBPASS);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -14,6 +21,8 @@ try {
 	print("Error connecting to SQL Server.");
 	die(print_r($e));
 }
+
+
 
 // SQL Server Extension Sample Code:
 $connectionInfo = array("UID" => $DBUSER, "pwd" => $DBPASS, "Database" => "Hergott", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
