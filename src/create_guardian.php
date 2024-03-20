@@ -1,51 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-include('config.php'); // Include your database configuration file
-if (!isset($_COOKIE['email'])) {
-    header("Location: login.html");
-    exit();
-}
-try {
-    // Connect to the database using PDO
-    $conn = new PDO("sqlsrv:server = tcp:hergott.database.windows.net,1433; Database = Hergott", $DBUSER, $DBPASS);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Retrieve email from cookie
-    if (isset($_COOKIE['email'])) {
-        $logged_email = $_COOKIE['email'];
-        echo "Email: " . $logged_email;
-
-        // Check if the user exists
-        $sql_check_user = "SELECT id FROM USERS WHERE email = ?";
-        $stmt_check_user = $conn->prepare($sql_check_user);
-        $stmt_check_user->execute([$logged_email]);
-        $row_check_user = $stmt_check_user->fetch(PDO::FETCH_ASSOC);
-
-        if ($row_check_user) {
-            $user_id = $row_check_user['id'];
-            echo "User ID: $user_id";
-
-            // Check if has_guardian is filled for the user
-            $sql_check_guardian = "SELECT has_guardian FROM GUARDIAN WHERE DeceasedID = ?";
-            $stmt_check_guardian = $conn->prepare($sql_check_guardian);
-            $stmt_check_guardian->execute([$user_id]);
-            $row_check_guardian = $stmt_check_guardian->fetch(PDO::FETCH_ASSOC);
-
-            if ($row_check_guardian && !empty($row_check_guardian['has_guardian'])) {
-                header("Location: guardian.php");
-                exit();
-            }
-        } else {
-            echo "User not found.";
-        }
-    } else {
-        echo "Email cookie not set.";
-    }
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
-?>
 
 <head>
     <meta charset="UTF-8">
@@ -134,8 +88,8 @@ try {
             </a>
         </div>
 
-        <div class="mx-4 items-center h-full" style="margin-top:3.5rem">
-            <div id="main_div" class="border-2 text-gray-700 rounded-lg p-4 max-w-5/6" style="min-height: calc(100vh - 16rem)">
+        <div class="mx-4 items-center mt-20 h-full">
+            <div id="main_div" class="border-2 text-gray-700 rounded-lg p-4 max-w-5/6" style="min-height: calc(100vh - 14rem)">
 
                 <div class="w-full px-3 py-2 bg-white rounded border border-black flex-col justify-center items-center gap-3 inline-flex">
                     <div class="w-full bg-green-200 justify-center rounded gap-1.5 inline-flex">
@@ -174,7 +128,7 @@ try {
                             <div class="h-1/4 flex items-center justify-center">
                                 <div class="w-64 h-7 text-center text-zinc-600 sm:text-lg md:text-xl font-semibold font-['Open Sans'] underline leading-relaxed italic">Select Primary Guardian</div>
                             </div>
-                            <div class="h-3/4 flex items-center justify-center" style="background-image: url('../res/iconsHL/step1.png'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                            <div class="h-3/4 flex items-center justify-center"><img src="../res/iconsHL/dots.jpg"></div>
                         </div>
                         <div class="flex items-center justify-center">
                             <a href="gifts.php">
@@ -205,7 +159,7 @@ try {
 
         <script>
             $(document).ready(function() {
-                $('#guardianFormSubmit').submit(function(e) { 
+                $('#guardianFormSubmit').submit(function(e) { // Changed 'guardianForm' to '#guardianFormSubmit'
                     e.preventDefault();
                     var values = $(this).serialize();
                     $.ajax({
@@ -214,8 +168,7 @@ try {
                         data: values,
                         success: function(res) {
                             alert('Successfully added Guardian!')
-                            console.log(res);
-                            window.location.href = "guardian.php";
+                            console.log(res)
                         },
                         error: function(xhr, status, error) {
                             console.log(xhr.responseText);

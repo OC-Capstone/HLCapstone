@@ -75,8 +75,9 @@ if (!isset($_COOKIE['email'])) {
     <div class="fixed top-0 left-0 w-full h-16 bg-red-600 flex justify-between items-center px-4">
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 
-        <h1 id="title" class="text-white text-4xl" style="font-family: 'Lato', sans-serif; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
-            Secure Document Vault</h1>
+        <div id="title" class="text-white font-lato font-bold text-shadow-md text-2xl sm:text-4xl md:text-4xl" style="font-family: 'Lato', sans-serif; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
+                Secure Document Vault
+    </div>
 
 
         <a href="logout.php">
