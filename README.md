@@ -11,3 +11,4 @@
  | 0.6 | 3/15/2024 | added password toggle and verify box | Luke |
  | 0.7 | 3/20/2024 | added ajax and popup error login and registration | Cade |
  | 0.8 | 3/20/2024 | added logout label and navbar label | Cade |
+ | 0.9 | 3/20/2024 | fixed icon positions on navbar | Cade |
