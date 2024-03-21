@@ -25,25 +25,24 @@ if ($conn === false) {
     die(print_r(sqlsrv_errors(), true));
 }
 
-/* Begin the transaction. */
-if (sqlsrv_begin_transaction($conn) === false) {
+// Fetch the hashed password from the database for comparison
+$sql = "SELECT password FROM USERS WHERE email = ?";
+$params = array($email);
+$stmt = sqlsrv_query($conn, $sql, $params);
+if ($stmt === false) {
     die(print_r(sqlsrv_errors(), true));
 }
 
-/* check if user exists */
-$sql = "SELECT email, password, last_login
-        FROM USERS WHERE email = ? AND password = ?";
-$params = array($email, SHA1($password));
-$options = array("Scrollable" => SQLSRV_CURSOR_KEYSET);
-/* ^ idk what SQLSRV_CURSOR_KEYSET does lol */
-$userExists = sqlsrv_query($conn, $sql, $params, $options);
-$row_count = sqlsrv_num_rows($userExists);
+$row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+$hashedPasswordFromDb = $row['password'];
 
-/* If the number of rows that match the query is 0, then the user does not exist */
-if ($row_count == 0) {
+// Verify the password using password_verify
+if (!password_verify($password, $hashedPasswordFromDb)) {
     echo "false";
 } else {
     echo "true";
+
+    // Close the statement and connection (already done before)
 
     // Fetch last_login from the database
     $sql = "SELECT last_login FROM USERS WHERE email = ?";
@@ -54,37 +53,50 @@ if ($row_count == 0) {
         die(print_r(sqlsrv_errors(), true)); // Handle SQL error
     }
 
-// Fetch the last_login value
+    // Fetch the last_login value and handle potential errors
+    $last_login = null;
     if ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
         $last_login = $row['last_login'];
-        sqlsrv_commit($conn);
+    }
+
+    if ($last_login) {
+        sqlsrv_commit($conn); // Commit transaction only if last_login retrieved
+
         $sql = "UPDATE USERS SET last_login = GETDATE() WHERE email = ?";
         $params = array($email);
-        echo '<br>'. $email .'<br>';
-        $stmt = sqlsrv_query($conn, $sql, $params);
-        echo $sql .'<br>';
 
-        if ($stmt === false) {
-            die(print_r(sqlsrv_errors(), true));
+        $updateStmt = sqlsrv_query($conn, $sql, $params);
+
+        if ($updateStmt === false) {
+            die(print_r(sqlsrv_errors(), true)); // Handle update error
         } else {
             echo "Update successful!";
         }
 
+        // Process and set cookies only if last_login is a DateTime object
         if ($last_login instanceof DateTime) {
-            // Set cookies with retrieved values
             setcookie('last_login', $last_login->format('Y-m-d H:i:s'), time() + 3600, "/");
             setcookie('email', $email, time() + 3600, "/");
-            
-            echo  '<br>' . $last_login->format('Y-m-d H:i:s') . '<br>';
-            $now = new DateTime('now', new DateTimeZone('UTC')); // Current date and time in UTC
-            $interval = $last_login->diff($now); // Difference between dates
+
+            echo '<br>' . $last_login->format('Y-m-d H:i:s') . '<br>';
+
+            $now = new DateTime('now', new DateTimeZone('UTC'));
+            $interval = $last_login->diff($now);
+
             echo $interval->format('%R%a days') . '<br>';
             echo $now->format('Y-m-d H:i:s');
         } else {
             echo "Failed to fetch last login!";
-        } 
-        header('Location: dashboard.php');
-        exit();  
+        }
     }
+
+    // Redirect to dashboard.php even if last_login update fails (separation of concerns)
+    header('Location: dashboard.php');
+    exit();
 }
+
+// Close the statement and connection (already done within the successful login block)
+// sqlsrv_free_stmt($stmt); // Not needed here (already closed in successful login block)
+// sqlsrv_close($conn);  // Not needed here (already closed in successful login block)
+
 ?>
