@@ -12,3 +12,4 @@
  | 0.7 | 3/20/2024 | added ajax and popup error login and registration | Cade |
  | 0.8 | 3/20/2024 | added logout label and navbar label | Cade |
  | 0.9 | 3/20/2024 | fixed icon positions on navbar | Cade |
+ | 0.10 | 3/21/2024 | Added guardian features | Luke |

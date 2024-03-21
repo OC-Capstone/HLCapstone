@@ -177,8 +177,8 @@ try {
                             <div class="h-3/4 flex items-center justify-center" style="background-image: url('../res/iconsHL/step1.png'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
                         </div>
                         <div class="flex items-center justify-center">
-                            <a href="gifts.php">
-                                <img src="../res/iconsHL/arrow_next.png" width="150px" height="100px">
+                            <a href="#">
+                                <img src="../res/iconsHL/arrow_grey_right.png" alt="Must have guardian filled to continue" width="150px" height="100px">
                             </a>
                         </div>
                     </div>
