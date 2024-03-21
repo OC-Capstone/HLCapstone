@@ -7,7 +7,7 @@ $lname = $_POST['lname'];
 $email = $_POST['email'];
 $altEmail = $_POST['altemail'];
 $password = $_POST['password'];
-$verifypassword = $_POST['verifypassword'];
+$verifypassword = $_POST['confirmpassword'];
 
 if ($password != $verifypassword) {
 	echo "Passwords do not match";
@@ -55,17 +55,16 @@ if ($row_count == 0) {
 		 VALUES (?, ?, ?, ?, ?, ?)";
 	//BASIC ENCRYPTION COME BACK TO THIS.
 	$params1 = array($fname, $lname, $mname, $email, $altEmail, SHA1($password));
-	echo $fname . " " . $lname . " " . $mname . " " . $email . " " . $altEmail . " " . SHA1($password);
 	$stmt1 = sqlsrv_query($conn, $sql1, $params1);
 
 	/* If both queries were successful, commit the transaction. */
 	/* Otherwise, rollback the transaction. */
 	if ($stmt1) {
 		sqlsrv_commit($conn);
-		echo "Transaction committed.<br />";
+		echo "true"; // Register success
 	} else {
 		sqlsrv_rollback($conn);
-		echo "Transaction rolled back.<br />";
+		
 	}
 
 	$sql = "UPDATE USERS SET last_login = GETDATE() WHERE email = ?";
@@ -76,7 +75,7 @@ if ($row_count == 0) {
 	header("Location: login.html");
 	exit();
 } else {
-	echo "User exists";
+	echo "false"; // User already exists
 }
 
 ?>
