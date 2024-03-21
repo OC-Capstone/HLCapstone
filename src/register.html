@@ -7,6 +7,7 @@
     <title>Registration Form</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         .password-container {
             position: relative;
@@ -18,73 +19,122 @@
             right: 10px;
             cursor: pointer;
             color: lightgray;
-            transform: translateY(-50%);
+            transform: translate(-400%, -50%);
+        }
+
+        .alert-container {
+            position: relative;
+        }
+
+        .alert {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 910%);
         }
     </style>
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (e) {
+                e.preventDefault();
+                xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        if (this.responseText == "false") {
+                            $('#popuplbl').text("This email is already in use.");
+                            $('#popup').removeClass('hidden');
+                        } else {
+                            $('#popup').addClass('hidden');
+                            window.location.href = "login.html";
+                        }
+                    }
+                };
+                xhttp.open("POST", "register.php", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("fname=" + $("#fname").val() + "&mname=" + $("#mname").val() + "&lname=" + $("#lname").val() + "&email=" + $("#email").val() + "&altemail=" + $("#altemail").val() + "&password=" + $("#password").val() + "&confirmpassword=" + $("#confirmpassword").val());
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+          $(".close").click(function () {
+            $('#popup').addClass('hidden');
+          });
+        });
+      </script>
 </head>
 
 <body class="bg-gray-100">
 
-    <div class="flex flex-col justify-content: center items-center bg-gray-300 relative "></div>
+    
 
     <div class="h-screen relative flex flex-col justify-content: center items-center margin-top: 100px">
 
         <!--background image-->
         <img src="../res/LoginPagebg.png" alt="bg" class="bg-gray-900 absolute inset-0 z-0 w-full h-full object-cover">
-
+        <div id="popup" class="hidden container alert-container z-10">
+            <div class="alert w-1/5" role="alert">
+                <div class="border-2 rounded border-black mb-4 bg-red-500 ">
+                    <div class="flex flex-nowrap justify-between items-center">
+                        <label id="popuplbl" class="ml-3 font-bold"></label>
+                        <button type="button" class="close mr-3 mb-1" data-dismiss="alert" aria-label="Close">
+                            <span class="text-2xl" aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--title-->
         <h2 class="text-3xl font-bold text-black mb-4 z-10 mt-24">SECURE DOCUMENT</h2>
 
         <div class="flex flex-col flex-col items-center justify-content: center items-center">
-            </style>
 
-            <form action="register.php" method="POST"
-                class="bg-cover bg-no-repeat bg-center bg-gradient-to-r from-gray-500 to-gray-600 p-8 absolute"
+            <form action="" method="POST"
+                class="bg-cover bg-no-repeat bg-center bg-gradient-to-r from-gray-500 to-gray-600 px-5 py-5 absolute"
                 style="background-image: url('../res/bgloginV.png'); max-width: 500px; width: 100%; max-height: 600px; height: 100%;">
-                <img src="../res/SDVHLNoWords.png" alt="logo" class="w-20 h-30 mx-auto mb-4">
-                <label class="block text-center text-black text-3xl font-bold mb-2">Hergott Law</label>
-                <div class="mb-4">
+                <img src="../res/SDVHLNoWords.png" alt="logo" class="w-20 h-30 mx-auto mb-7">
+                <div class="mb-4 text-center">
                     <input
-                        class="shadow border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                        type="text" placeholder="First Name" name="fname" required>
+                        class="text-center shadow border rounded  w-2/3 py-1 px-2 text-black leading-tight focus:outline-none focus:shadow-outline"
+                        type="text" placeholder="First Name" id="fname" name="fname" required>
                 </div>
-                <div class="mb-4">
+                <div class="mb-4 text-center">
                     <input
-                        class="shadow border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                        type="text" placeholder="Middle Name" name="mname" required>
+                        class="text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                        type="text" placeholder="Middle Name" id="mname" name="mname" required>
                 </div>
-                <div class="mb-4">
+                <div class="mb-4 text-center">
                     <input
-                        class="shadow border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                        type="text" placeholder="Last Name" name="lname" required>
+                        class="text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                        type="text" placeholder="Last Name" id="lname" name="lname" required>
                 </div>
-                <div class="mb-4">
+                <div class="mb-4 text-center">
                     <input
-                        class="shadow border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                        type="email" placeholder="Email" name="email" required>
+                        class="text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                        type="email" placeholder="Email" id="email" name="email" required>
                 </div>
-                <div class="mb-4">
+                <div class="mb-4 text-center">
                     <input
-                        class="shadow border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                        type="email" placeholder="Alternate Email" name="altemail" required>
+                        class="text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                        type="email" placeholder="Alternate Email" id="altemail" name="altemail" required>
                 </div>
-                <div class="mb-4 password-container">
+                <div class="mb-4 password-container text-center">
                     <input
-                        class="shadow border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                        type="password" placeholder="Password" name="password" id="password" required>
+                        class="text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                        type="password" placeholder="Password" id="password" name="password" id="password" required>
                     <i class="fa-solid fa-eye" id="eye"></i>
                 </div>
-                <div class="mb-6 password-container">
+                <div class="mb-6 password-container text-center">
                     <input
-                        class="shadow border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                        type="password" placeholder="Confirm Password" name="confirmpassword" id="confirmpassword" required>
+                        class="text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                        type="password" placeholder="Confirm Password" id="confirmpassword" name="confirmpassword" id="confirmpassword"
+                        required>
                     <i class="fa-solid fa-eye" id="eye2"></i>
                 </div>
                 <div class="flex flex-col items-center">
                     <input
-                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 w-full rounded focus:outline-none focus:shadow-outline"
+                        class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 w-2/3 rounded focus:outline-none focus:shadow-outline"
                         type="submit" value="Register">
-                    <a class="inline-block align-baseline font-bold text-sm text-white hover:text-red-800 mt-4"
+                    <a class="inline-block align-baseline font-bold text-sm text-white hover:text-red-800 text-lg mt-4"
                         href="login.html">
                         Already have an account? Login here.
                     </a>
@@ -105,7 +155,7 @@
     })
 
     const confirmpasswordInput = document.querySelector("#confirmpassword")
-    const confirmEye = document.querySelector("#eye2") 
+    const confirmEye = document.querySelector("#eye2")
 
     confirmEye.addEventListener("click", function () {
         this.classList.toggle("fa-eye-slash")

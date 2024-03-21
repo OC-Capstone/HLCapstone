@@ -2,9 +2,9 @@
 include('config.php');
 
 // PHP Data Objects(PDO) Sample Code:
-$fname = $_POST['Fname'];
-$mname = $_POST['Mname'];
-$lname = $_POST['Lname'];
+$fname = $_POST['fname'];
+$mname = $_POST['mname'];
+$lname = $_POST['lname'];
 $email = $_POST['email'];
 $altEmail = $_POST['altemail'];
 $password = $_POST['password'];
@@ -41,10 +41,9 @@ $row_count = sqlsrv_num_rows($userExists);
 
 /* If the number of rows that match the query is 0, then the user does not exist */
 if ($row_count == 0) {
-    echo "User does not exist!";
+    echo "false";
 } else {
-    echo "Logged in successfully!";
-    echo "<br> <a href='fetch_lastlogin.php'>Temp Link to Test Last Login</a>";
+    echo "true";
 
     // Fetch last_login from the database
     $sql = "SELECT last_login FROM USERS WHERE email = ?";
