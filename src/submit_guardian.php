@@ -19,7 +19,7 @@ try {
     // Retrieve email from cookie
     if (isset($_COOKIE['email'])) {
         $logged_email = $_COOKIE['email'];
-        echo "Email: " . $logged_email;
+        //echo "Email: " . $logged_email;
 
         // Check if the user exists
         $sql_check_user = "SELECT id FROM USERS WHERE email = ?";
@@ -29,7 +29,7 @@ try {
 
         if ($row_check_user) {
             $user_id = $row_check_user['id'];
-            echo "User ID: $user_id";
+            //echo "User ID: $user_id";
 
             // Try to UPDATE first, if it fails, INSERT
             $sql_update_guardian = "UPDATE GUARDIAN SET FirstName = ?, MiddleName = ?, LastName = ?, Relationship = ?, DeceasedID = ?, has_guardian = 'true' WHERE DeceasedID = ?";
@@ -39,7 +39,7 @@ try {
 
             if ($success && $stmt_update_guardian->rowCount() > 0) {
                 // Record updated successfully
-                echo "Guardian information updated successfully.";
+                //echo "Guardian information updated successfully.";
                 $conn->commit();
             } else {
                 // Record not found, try INSERT
@@ -49,22 +49,22 @@ try {
                 $success = $stmt_insert_guardian->execute($params_insert_guardian);
 
                 if ($success) {
-                    echo "Guardian information inserted successfully.";
+                    //echo "Guardian information inserted successfully.";
                     // If both queries were successful, commit the transaction
                     $conn->commit();
-                    echo "Transaction committed.<br />";
+                    //echo "Transaction committed.<br />";
                 } else {
-                    echo "Error inserting guardian information.";
+                    //echo "Error inserting guardian information.";
                     // Otherwise, rollback the transaction
                     $conn->rollBack();
-                    echo "Transaction rolled back.<br />";
+                    //echo "Transaction rolled back.<br />";
                 }
             }
         } else {
-            echo "User not found.";
+            //echo "User not found.";
         }
     } else {
-        echo "Email cookie not set.";
+        //echo "Email cookie not set.";
     }
 } catch (PDOException $e) {
     // Rollback the transaction on error

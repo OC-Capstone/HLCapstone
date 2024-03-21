@@ -67,24 +67,25 @@ if (!isset($_COOKIE['email'])) {
 </head>
 
 <body>
-    <div id="mySidenav" class="sidenav">
-        <?php
-        include("navbar.html");
-        ?>
-    </div>
-    <div class="fixed top-0 left-0 w-full h-16 bg-red-600 flex justify-between items-center px-4">
-        <span style="font-size:30px;cursor:pointer" class="text-white" onclick="openNav()">&#9776; Dashboard</span>
+    <div class="grid grid-cols-1 gap-4">
+        <div id="mySidenav" class="sidenav">
+            <?php include("navbar.html"); ?>
+        </div>
+        <div class="fixed top-0 left-0 w-full h-16 bg-red-600 flex justify-between items-center px-4">
+            <span style="font-size:30px;cursor:pointer" class="text-white" onclick="openNav()">&#9776; Dashboard</span>
 
-        <div id="title" class="text-white font-lato ml-20 font-bold text-shadow-md text-2xl sm:text-4xl md:text-4xl" style="font-family: 'Lato', sans-serif; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
-            Secure Document Vault
+            <div id="title" class="text-white font-lato font-bold text-shadow-md text-2xl sm:text-4xl md:text-4xl" style="font-family: 'Lato', sans-serif; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
+                Secure Document Vault
+            </div>
+
+
+            <a href="logout.php">
+                <button class=" text-white text-4xl" style='font-size:30px'>Logout <i class='fas fa-sign-out-alt'></i></button>
+            </a>
         </div>
 
-
-        <a href="logout.php">
-        
-        <button class="pl-12 text-white text-4xl"style='font-size:30px'>Logout <i class='fas fa-sign-out-alt'></i></button>
-        </a>
     </div>
+
 
 
 

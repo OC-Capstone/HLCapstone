@@ -132,7 +132,7 @@
                         </div>
                         <div class="flex items-center justify-center">
                             <a href="gifts.php">
-                                <img src="../res/iconsHL/arrow_next.png" width="150px" height="100px">
+                                <img src="../res/iconsHL/arrow_grey_right.png" alt="Must have guardian filled to continue" width="150px" height="100px">
                             </a>
                         </div>
                     </div>
@@ -169,6 +169,7 @@
                         success: function(res) {
                             alert('Successfully added Guardian!')
                             console.log(res)
+                            window.location.href = "guardian.php";
                         },
                         error: function(xhr, status, error) {
                             console.log(xhr.responseText);
