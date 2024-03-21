@@ -20,7 +20,7 @@ try {
     // Retrieve email from cookie
     if (isset($_COOKIE['email'])) {
         $logged_email = $_COOKIE['email'];
-        echo "Email: " . $logged_email;
+        //echo "Email: " . $logged_email;
 
         // Check if the user exists
         $sql_check_user = "SELECT id FROM USERS WHERE email = ?";
@@ -30,7 +30,7 @@ try {
 
         if ($row_check_user) {
             $user_id = $row_check_user['id'];
-            echo "User ID: $user_id";
+            //echo "User ID: $user_id";
 
             // Fetch guardian data for the user
             $sql_fetch_guardian = "SELECT * FROM GUARDIAN WHERE DeceasedID = ?";
@@ -39,23 +39,23 @@ try {
             $guardian_data = $stmt_fetch_guardian->fetch(PDO::FETCH_ASSOC);
 
             if ($guardian_data) {
-                echo "Guardian data for User ID $user_id:<br>";
+                //echo "Guardian data for User ID $user_id:<br>";
                 // Assign guardian data to variables
                 $guardian_first_name = $guardian_data['FirstName'];
                 $guardian_middle_name = $guardian_data['MiddleName'];
                 $guardian_last_name = $guardian_data['LastName'];
                 $guardian_relationship = $guardian_data['Relationship'];
             } else {
-                echo "No guardian data found for User ID $user_id.";
+                //echo "No guardian data found for User ID $user_id.";
             }
         } else {
-            echo "User not found.";
+            //echo "User not found.";
         }
     } else {
-        echo "Email cookie not set.";
+        //echo "Email cookie not set.";
     }
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    //echo "Error: " . $e->getMessage();
 }
 ?>
 
@@ -66,6 +66,7 @@ try {
     <!-- Include Tailwind CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
             font-family: "Lato", sans-serif;
@@ -142,7 +143,7 @@ try {
         </div>
 
         <!--  Body -->
-        <div class="mx-4 items-center h-full" style="margin-top:3.5rem"> <!-- Adjusted with padding-top to push content below the top bar -->
+        <div class="mx-4 items-center mt-20 h-full"><!-- Adjusted with padding-top to push content below the top bar -->
             <div class="border-2 text-gray-700 rounded-lg p-4 max-w-5/6" style="min-height: calc(100vh - 16rem)">
                 <!-- Content - Guardian Name w/ Edit Icon -->
                 <div class="w-full px-3 py-2 bg-white rounded border border-black flex-col justify-start items-center gap-3 inline-flex mt-4">
@@ -157,14 +158,31 @@ try {
                             <div>
                                 <span class="text-lg md:text-xl lg:text-2xl">
                                     <?php echo $guardian_first_name . " " . $guardian_middle_name . " " . $guardian_last_name; ?>
-                                </span>&nbsp <button><a href="create_guardian.php"><i class="fas fa-edit"></i></a></button>
+                                </span>&nbsp <button id="addGuardianButton"><i class="fas fa-edit"></i></button>
                             </div>
                             <div>
                                 <span class="text-md md:text-lg lg:text-xl"><?php echo $guardian_relationship;?></span>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Hidden Form -->
+                    <div id="guardianForm" class="hidden w-full px-3 py-2 bg-white rounded flex-col justify-center items-center gap-3">
+                        <form id="guardianFormSubmit">
+                            <input type="text" name="fname" id="fname" placeholder="First Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2" required>
+                            <input type="text" name="mname" id="mname" placeholder="Middle Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2" required>
+                            <input type="text" name="lname" id="lname" placeholder="Last Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2" required>
+                            <input type="text" name="relationship" id="relationship" placeholder="Relationship to You" class="w-full mb-2 border border-gray-300 rounded px-3 py-2" required>
+                            <button type="submit" class="text-black bg-green-200 w-full self-stretch h-12 px-3 py-2 bg-white rounded border border-black justify-center items-center gap-3 inline-flex">
+                                Save Guardian
+                            </button>
+                        </form>
+                    </div>
+                    <!-- End of Hidden Form -->
+
                 </div>
+
+                
                 
 
             </div>
@@ -199,7 +217,7 @@ try {
             </div>
         </div>
 
-        <script>
+        <<script>
             function openNav() {
                 document.getElementById("mySidenav").style.width = "400px";
             }
@@ -207,8 +225,37 @@ try {
             function closeNav() {
                 document.getElementById("mySidenav").style.width = "0";
             }
+
+            const addGuardianButton = document.getElementById('addGuardianButton');
+            const guardianFormFind = document.getElementById('guardianForm');
+
+            addGuardianButton.addEventListener('click', () => {
+                guardianFormFind.classList.toggle('hidden');
+            });
         </script>
 
+        <script>
+            $(document).ready(function() {
+                $('#guardianFormSubmit').submit(function(e) { // Changed 'guardianForm' to '#guardianFormSubmit'
+                    e.preventDefault();
+                    var values = $(this).serialize();
+                    $.ajax({
+                        url: "submit_guardian.php",
+                        type: "post",
+                        data: values,
+                        success: function(res) {
+                            alert('Successfully edited Guardian!')
+                            console.log(res)
+                            location.reload();
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(xhr.responseText);
+                        }
+                    });
+                });
+            });
+        </script>
+    
 </body>
 
 </html>
