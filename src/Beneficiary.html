@@ -16,16 +16,19 @@
             xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                    if (this.responseText == "false") {
-                        
+                  console.log("button clicked");
+                  console.log($("#fullBeneficiaryName").val());
+                  console.log($("#relationship").val());
+                    if (this.responseText == "success") {
+                        console.log("success");
                     } else {
-                       
+                       console.log("failed");
                     }
                 }
             };
             xhttp.open("POST", "Beneficiary.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("fullBeneficiaryName=" + $("#fullBeneficiaryName").val() + "&relationship=" + $("#relationship").val() + "&relationshipSplit=" + $("#relationshipSplit").val() + "&amount=" + $("#amount").val() + "&giftName=" + $("#giftName").val() + "&giftDetails=" + $("#giftDetails").val() + "&beneficiaryType=" + $("#beneficiaryType").val());
+            xhttp.send("fullBeneficiaryName=" + $("#fullBeneficiaryName").val() + "&relationship=" + $("#relationship").val()+ "&amount=" + $("#amount").val() + "&giftName=" + $("#giftName").val() + "&giftDetails=" + $("#giftDetails").val());
         });
     });
 </script>
