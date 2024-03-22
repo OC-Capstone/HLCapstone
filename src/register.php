@@ -54,7 +54,8 @@ if ($row_count == 0) {
 	$sql1 = "INSERT INTO USERS (firstName, lastName, middleName, email, altEmail, password) 
 		 VALUES (?, ?, ?, ?, ?, ?)";
 	//BASIC ENCRYPTION COME BACK TO THIS.
-	$params1 = array($fname, $lname, $mname, $email, $altEmail, SHA1($password));
+	$passwordHash = password_hash($password, PASSWORD_DEFAULT);
+	$params1 = array($fname, $lname, $mname, $email, $altEmail, $passwordHash);
 	$stmt1 = sqlsrv_query($conn, $sql1, $params1);
 
 	/* If both queries were successful, commit the transaction. */

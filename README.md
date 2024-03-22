@@ -13,3 +13,4 @@
  | 0.8 | 3/20/2024 | added logout label and navbar label | Cade |
  | 0.9 | 3/20/2024 | fixed icon positions on navbar | Cade |
  | 0.10 | 3/21/2024 | Added guardian features | Luke |
+  | 0.11 | 3/21/2024 | Changed sha1 encryption to one way hashing | Cade |
