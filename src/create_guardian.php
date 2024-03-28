@@ -93,7 +93,7 @@
 
                 <div class="w-full px-3 py-2 bg-white rounded border border-black flex-col justify-center items-center gap-3 inline-flex">
                     <div class="w-full bg-green-200 justify-center rounded gap-1.5 inline-flex">
-                        <div class="text-black text-2xl font-normal font-['Inter'] leading-10">Primary Guardian</div>
+                        <div class="text-black text-2xl font-normal font-['Inter'] leading-10">Guardian</div>
                     </div>
                     <button id="addGuardianButton" class="self-stretch h-12 px-3 py-2 bg-white rounded border border-black justify-center items-center gap-3 inline-flex">
                         + Add Primary Guardian
