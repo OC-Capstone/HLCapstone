@@ -27,7 +27,7 @@ try {
             echo "User ID: $user_id";
 
             // Check if has_guardian is filled for the user
-            $sql_check_guardian = "SELECT has_guardian FROM GUARDIAN WHERE DeceasedID = ?";
+            $sql_check_guardian = "SELECT has_guardian FROM GUARDIAN WHERE user_id = ?";
             $stmt_check_guardian = $conn->prepare($sql_check_guardian);
             $stmt_check_guardian->execute([$user_id]);
             $row_check_guardian = $stmt_check_guardian->fetch(PDO::FETCH_ASSOC);
@@ -150,7 +150,7 @@ try {
                     <div id="guardianForm" class="hidden w-full px-3 py-2 bg-white rounded flex-col justify-center items-center gap-3 hidden">
                         <form id="guardianFormSubmit">
                             <input type="text" name="fname" id="fname" placeholder="First Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2" required>
-                            <input type="text" name="mname" id="mname" placeholder="Middle Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2" required>
+                            <input type="text" name="mname" id="mname" placeholder="Middle Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2" >
                             <input type="text" name="lname" id="lname" placeholder="Last Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2" required>
                             <input type="text" name="relationship" id="relationship" placeholder="Relationship to You" class="w-full mb-2 border border-gray-300 rounded px-3 py-2" required>
                             <button type="submit" class="text-black bg-green-200 w-full self-stretch h-12 px-3 py-2 bg-white rounded border border-black justify-center items-center gap-3 inline-flex">

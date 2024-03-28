@@ -31,6 +31,15 @@
             left: 50%;
             transform: translate(-50%, 910%);
         }
+
+        .error{
+            border: 3px solid red;
+        }
+        .error::placeholder {
+            color: red;
+            opacity: 1;
+            /* Firefox */
+        }
     </style>
     <script>
         $(document).ready(function () {
@@ -40,10 +49,21 @@
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
                         if (this.responseText == "false") {
-                            $('#popuplbl').text("This email is already in use.");
-                            $('#popup').removeClass('hidden');
+                            console.log(this.responseText);
+                            $('#email').val('');
+                            $('#email').attr("placeholder", "Email is already in use.");
+                            $('#email').addClass('error');
+                            $('#altemail').val('');
+                            $('#altemail').attr("placeholder", "Email is already in use.");
+                            $('#altemail').addClass('error');
+                        } else if (this.responseText == "pass") {
+                            console.log(this.responseText);
+                            $('.password').val('');
+                            $('.password').attr("placeholder", "Passwords do not match.");
+                            $('.password').addClass('error');
+
                         } else {
-                            $('#popup').addClass('hidden');
+                            console.log(this.responseText);
                             window.location.href = "login.html";
                         }
                     }
@@ -56,34 +76,30 @@
     </script>
     <script>
         $(document).ready(function () {
-          $(".close").click(function () {
-            $('#popup').addClass('hidden');
-          });
+            $(".password").focus(function () {
+                $('.password').removeClass('error');
+                $('.password').attr("placeholder", "Password");
+            });
+            $(".email").focus(function () {
+                $('#email').removeClass('error');
+                $('#email').attr("placeholder", "Email");
+                $('#altemail').removeClass('error');
+                $('#altemail').attr("placeholder", "Alternate Email");
+            });
         });
-      </script>
+    </script>
 </head>
 
 <body class="bg-gray-100">
 
-    
+
 
     <div class="h-screen relative flex flex-col justify-content: center items-center margin-top: 100px">
 
         <!--background image-->
         <img src="../res/LoginPagebg.png" alt="bg" class="bg-gray-900 absolute inset-0 z-0 w-full h-full object-cover">
-        <div id="popup" class="hidden container alert-container z-10">
-            <div class="alert w-1/5" role="alert">
-                <div class="border-2 rounded border-black mb-4 bg-red-500 ">
-                    <div class="flex flex-nowrap justify-between items-center">
-                        <label id="popuplbl" class="ml-3 font-bold"></label>
-                        <button type="button" class="close mr-3 mb-1" data-dismiss="alert" aria-label="Close">
-                            <span class="text-2xl" aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--title-->
+
+
         <h2 class="text-3xl font-bold text-black mb-4 z-10 mt-24">SECURE DOCUMENT</h2>
 
         <div class="flex flex-col flex-col items-center justify-content: center items-center">
@@ -94,13 +110,13 @@
                 <img src="../res/SDVHLNoWords.png" alt="logo" class="w-20 h-30 mx-auto mb-7">
                 <div class="mb-4 text-center">
                     <input
-                    class="text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                        class="text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
                         type="text" placeholder="First Name" id="fname" name="fname" required>
                 </div>
                 <div class="mb-4 text-center">
                     <input
-                    class="text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                        type="text" placeholder="Middle Name" id="mname" name="mname" required>
+                        class="text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                        type="text" placeholder="Middle Name" id="mname" name="mname">
                 </div>
                 <div class="mb-4 text-center">
                     <input
@@ -109,25 +125,25 @@
                 </div>
                 <div class="mb-4 text-center">
                     <input
-                        class="text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                        class="email text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
                         type="email" placeholder="Email" id="email" name="email" required>
                 </div>
                 <div class="mb-4 text-center">
                     <input
-                        class="text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                        class="email text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
                         type="email" placeholder="Alternate Email" id="altemail" name="altemail" required>
                 </div>
                 <div class="mb-4 password-container text-center">
                     <input
-                        class="text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                        class="password text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
                         type="password" placeholder="Password" id="password" name="password" id="password" required>
                     <i class="fa-solid fa-eye" id="eye"></i>
                 </div>
                 <div class="mb-4 password-container text-center">
                     <input
-                        class="text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                        type="password" placeholder="Confirm Password" id="confirmpassword" name="confirmpassword" id="confirmpassword"
-                        required>
+                        class="password text-center shadow border rounded w-2/3 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                        type="password" placeholder="Confirm Password" name="confirmpassword"
+                        id=confirmpassword required>
                     <i class="fa-solid fa-eye" id="eye2"></i>
                 </div>
                 <div class="flex flex-col items-center">

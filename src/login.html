@@ -22,14 +22,14 @@
       color: lightgray;
     }
 
-    .alert-container {
-      position: relative;
+    .error {
+      border: 3px solid red;
     }
 
-    .alert {
-      position: absolute;
-      left: 50%;
-      transform: translate(-25%, 450%);
+    .error::placeholder {
+      color: red;
+      opacity: 1;
+      /* Firefox */
     }
   </style>
   <script>
@@ -40,11 +40,14 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             if (this.responseText == "false") {
-              $('#popuplbl').text("Invalid email or password");
-              $('#popup').removeClass('hidden');
+              console.log(this.responseText);
               $('#password').val('');
-            } else {  
-              $('#popup').addClass('hidden');
+              $('#password').attr("placeholder", "Incorrect email or password.");
+              $('#password').addClass('error');
+              $('#email').val('');
+              $('#email').attr("placeholder", "Incorrect email or password.");
+              $('#email').addClass('error');
+            } else {
               window.location.href = "dashboard.php";
             }
           }
@@ -57,8 +60,11 @@
   </script>
   <script>
     $(document).ready(function () {
-      $(".close").click(function () {
-        $('#popup').addClass('hidden');
+      $(".login").focus(function () {
+        $('#password').removeClass('error');
+        $('#password').attr("placeholder", "Password");
+        $('#email').removeClass('error');
+        $('#email').attr("placeholder", "Email");
       });
     });
   </script>
@@ -70,22 +76,10 @@
 
 
   <div class="flex flex-col justify-center items-center h-screen">
-    <div id="popup" class="hidden container alert-container z-20">
-      <div class="alert w-1/6" role="alert">
-        <div class="border-2 rounded border-black mb-4 bg-red-500 ">
-          <div class="flex justify-between items-center">
-            <label id="popuplbl"class="ml-3 font-bold"></label>
-            <button type="button" class="close mr-3 mb-1" data-dismiss="alert" aria-label="Close">
-              <span class="text-2xl"aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- Rest of your code -->
     <h2 class="text-3xl font-bold text-black z-10">SECURE DOCUMENT</h2>
     <!-- Set a max-width to match the image size and remove margin -->
-    <form action="" method="POST" class=" bg-contain bg-no-repeat bg-center px-8 z-10 py-8"
+    <form method="POST" class=" bg-contain bg-no-repeat bg-center px-8 z-10 py-8"
       style="background-image: url('../res/bgloginV.png'); max-width: 450px; width: 100%; max-height: 550px; height: 100%;">
       <img src="../res/SDVHLNoWords.png" alt="logo" class="w-20 h-30 mx-auto">
       <label class="block text-center text-black text-3xl font-bold mb-2">Hergott Law</label>
@@ -97,15 +91,15 @@
           Email
         </label>
         <input
-          class="shadow border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-          id="Email" type="text" placeholder="Email" name="email" required>
+          class="login shadow border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+          id="email" type="text" placeholder="Email" name="email" required>
       </div>
       <div class="mb-6 password-container">
         <label class="block text-white text-sm font-bold text-base mb-2" for="password">
           Password
         </label>
         <input
-          class="shadow border rounded w-full py-2 px-3 text-black mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="login shadow border rounded w-full py-2 px-3 text-black mb-3 leading-tight focus:outline-none focus:shadow-outline"
           id="password" type="password" placeholder="password" name="password" required>
         <i class="fa-solid fa-eye" id="eye"></i>
       </div>

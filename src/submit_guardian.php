@@ -5,6 +5,11 @@ include('config.php'); // Assuming this file contains your database credentials
 // Assuming you have form fields with the names 'fname', 'mname', 'lname', 'relationship'
 $fname = $_POST['fname'];
 $mname = $_POST['mname'];
+if($mname != "") {
+	$mname = $_POST['mname'];
+} else {
+	$mname = ',';
+}
 $lname = $_POST['lname'];
 $relationship = $_POST['relationship'];
 
@@ -36,8 +41,8 @@ try {
             //echo "User ID: $user_id";
 
             // Try to UPDATE first, if it fails, INSERT
-            $sql_update_guardian = "UPDATE GUARDIAN SET FirstName = ?, MiddleName = ?, LastName = ?, Relationship = ?, DeceasedID = ?, has_guardian = 'true' WHERE DeceasedID = ?";
-            $params_update_guardian = array($fname, $mname, $lname, $relationship, $user_id, $user_id);
+            $sql_update_guardian = "UPDATE GUARDIAN SET firstname = ?, middlename = ?, lastname = ?, relationshipToDeceased = ?, has_guardian = '1' WHERE user_id = ?";
+            $params_update_guardian = array($fname, $mname, $lname, $relationship, $user_id);
             $stmt_update_guardian = $conn->prepare($sql_update_guardian);
             $success = $stmt_update_guardian->execute($params_update_guardian);
 
@@ -47,8 +52,8 @@ try {
                 $conn->commit();
             } else {
                 // Record not found, try INSERT
-                $sql_insert_guardian = "INSERT INTO GUARDIAN (FirstName, MiddleName, LastName, Relationship, DeceasedID, has_guardian) VALUES (?, ?, ?, ?, ?, 'true')";
-                $params_insert_guardian = array($fname, $mname, $lname, $relationship, $user_id);
+                $sql_insert_guardian = "INSERT INTO GUARDIAN (user_id, firstname, middlename, lastname, relationshipToDeceased, has_guardian) VALUES (?, ?, ?, ?, ?, '1')";
+                $params_insert_guardian = array($user_id, $fname, $mname, $lname, $relationship);
                 $stmt_insert_guardian = $conn->prepare($sql_insert_guardian);
                 $success = $stmt_insert_guardian->execute($params_insert_guardian);
 
