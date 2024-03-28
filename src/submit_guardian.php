@@ -8,6 +8,10 @@ $mname = $_POST['mname'];
 $lname = $_POST['lname'];
 $relationship = $_POST['relationship'];
 
+$relationship = trim($relationship);
+$relationship = preg_replace('/\s+/', '-', $relationship);
+$relationship = strtolower($relationship);
+
 try {
     // Connect to the database using PDO
     $conn = new PDO("sqlsrv:server = tcp:hergott.database.windows.net,1433; Database = Hergott", $DBUSER, $DBPASS);
