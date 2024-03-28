@@ -3,6 +3,11 @@ include('config.php');
 // PHP Data Objects(PDO) Sample Code:
 $fname = $_POST['fname'];
 $mname = $_POST['mname'];
+if($mname != "") {
+	$mname = $_POST['mname'];
+} else {
+	$mname = ',';
+}
 $lname = $_POST['lname'];
 $email = $_POST['email'];
 $altEmail = $_POST['altemail'];
@@ -10,7 +15,7 @@ $password = $_POST['password'];
 $verifypassword = $_POST['confirmpassword'];
 
 if ($password != $verifypassword) {
-	echo "Passwords do not match";
+	echo "pass";
 	exit();
 }
 
@@ -51,11 +56,11 @@ $row_count = sqlsrv_num_rows($userExists);
 if ($row_count == 0) {
 
 	/* Set up and execute query */
-	$sql1 = "INSERT INTO USERS (firstName, lastName, middleName, email, altEmail, password) 
+	$sql1 = "INSERT INTO USERS (firstname, middleName, lastname, email, altEmail, password) 
 		 VALUES (?, ?, ?, ?, ?, ?)";
 	//BASIC ENCRYPTION COME BACK TO THIS.
 	$passwordHash = password_hash($password, PASSWORD_DEFAULT);
-	$params1 = array($fname, $lname, $mname, $email, $altEmail, $passwordHash);
+	$params1 = array($fname, $mname, $lname, $email, $altEmail, $passwordHash);
 	$stmt1 = sqlsrv_query($conn, $sql1, $params1);
 
 	/* If both queries were successful, commit the transaction. */

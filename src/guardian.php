@@ -33,7 +33,7 @@ try {
             //echo "User ID: $user_id";
 
             // Fetch guardian data for the user
-            $sql_fetch_guardian = "SELECT * FROM GUARDIAN WHERE DeceasedID = ?";
+            $sql_fetch_guardian = "SELECT * FROM GUARDIAN WHERE user_id = ?";
             $stmt_fetch_guardian = $conn->prepare($sql_fetch_guardian);
             $stmt_fetch_guardian->execute([$user_id]);
             $guardian_data = $stmt_fetch_guardian->fetch(PDO::FETCH_ASSOC);
@@ -41,10 +41,10 @@ try {
             if ($guardian_data) {
                 //echo "Guardian data for User ID $user_id:<br>";
                 // Assign guardian data to variables
-                $guardian_first_name = $guardian_data['FirstName'];
-                $guardian_middle_name = $guardian_data['MiddleName'];
-                $guardian_last_name = $guardian_data['LastName'];
-                $guardian_relationship = $guardian_data['Relationship'];
+                $guardian_first_name = $guardian_data['firstname'];
+                $guardian_middle_name = $guardian_data['middlename'];
+                $guardian_last_name = $guardian_data['lastname'];
+                $guardian_relationship = $guardian_data['relationshipToDeceased'];
             } else {
                 //echo "No guardian data found for User ID $user_id.";
             }
@@ -170,7 +170,7 @@ try {
                     <div id="guardianForm" class="hidden w-full px-3 py-2 bg-white rounded flex-col justify-center items-center gap-3">
                         <form id="guardianFormSubmit">
                             <input type="text" name="fname" id="fname" placeholder="First Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2 text-center" required value="<?php echo $guardian_first_name; ?>">
-                            <input type="text" name="mname" id="mname" placeholder="Middle Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2 text-center" required value="<?php echo $guardian_middle_name; ?>">
+                            <input type="text" name="mname" id="mname" placeholder="Middle Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2 text-center" value="<?php echo $guardian_middle_name; ?>">
                             <input type="text" name="lname" id="lname" placeholder="Last Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2 text-center" required value="<?php echo $guardian_last_name; ?>">
                             <input type="text" name="relationship" id="relationship" placeholder="Relationship to You" class="w-full mb-2 border border-gray-300 rounded px-3 py-2 text-center" required value="<?php echo $guardian_relationship; ?>">
                             <button type="submit" class="text-black bg-green-200 w-full self-stretch h-12 px-3 py-2 bg-white rounded border border-black justify-center items-center gap-3 inline-flex text-center">

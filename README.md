@@ -16,4 +16,6 @@
  | 0.11 | 3/21/2024 | Changed sha1 encryption to one way hashing | Cade |
  | 0.12 | 3/22/2024 | fixed register page first name input size | Cade |
  | 0.13 | 3/28/2024 | Lowercase, trim, add dashes to guardian | Luke |
+ | 0.14 | 3/28/2024 | normalized DB, fixed php queries, changed error box in login, and register. | Cade |
+ 
 
