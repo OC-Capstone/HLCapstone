@@ -96,7 +96,7 @@
                         <div class="text-black text-2xl font-normal font-['Inter'] leading-10">Guardian</div>
                     </div>
                     <button id="addGuardianButton" class="self-stretch h-12 px-3 py-2 bg-white rounded border border-black justify-center items-center gap-3 inline-flex">
-                        + Add Primary Guardian
+                        + Add Guardian
                     </button>
 
 
@@ -126,7 +126,7 @@
 
                         <div class="flex flex-col">
                             <div class="h-1/4 flex items-center justify-center">
-                                <div class="w-64 h-7 text-center text-zinc-600 sm:text-lg md:text-xl font-semibold font-['Open Sans'] underline leading-relaxed italic">Select Primary Guardian</div>
+                                <div class="w-64 h-7 text-center text-zinc-600 sm:text-lg md:text-xl font-semibold font-['Open Sans'] underline leading-relaxed italic">Select Guardian</div>
                             </div>
                             <div class="h-3/4 flex items-center justify-center"><img src="../res/iconsHL/dots.jpg"></div>
                         </div>
