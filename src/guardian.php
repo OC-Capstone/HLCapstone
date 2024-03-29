@@ -192,7 +192,7 @@ try {
                 <div class="fixed bottom-0  inset-x-0 w-full h-32 flex justify-center grid grid-cols-3 gap-4 bg-white">
                     <!-- Column One -->
                     <div class="flex items-center justify-center">
-                        <a href="#">
+                        <a href="dashboard.php">
                             <img src="../res/iconsHL/arrow_back.png" width="150px" height="100px">
                         </a>
                     </div>
@@ -201,7 +201,7 @@ try {
                     <div class=" flex flex-col">
                         <!-- Row One -->
                         <div class="h-1/4 flex items-center justify-center">
-                            <div class="w-64 h-7 text-center text-zinc-600 sm:text-lg md:text-xl font-semibold font-['Open Sans'] underline leading-relaxed italic">Select Primary Guardian</div>
+                            <div class="w-64 h-7 text-center text-zinc-600 sm:text-lg md:text-xl font-semibold font-['Open Sans'] underline leading-relaxed italic"></div>
                         </div>
                         <!-- Row Two -->
                         <div class="h-3/4 flex items-center justify-center" style="background-image: url('../res/iconsHL/step1.png'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
@@ -217,7 +217,7 @@ try {
             </div>
         </div>
 
-        <<script>
+        <script>
             function openNav() {
                 document.getElementById("mySidenav").style.width = "400px";
             }
