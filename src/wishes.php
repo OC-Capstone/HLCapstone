@@ -32,8 +32,11 @@ try {
             $stmt_check_guardian->execute([$user_id]);
             $row_check_guardian = $stmt_check_guardian->fetch(PDO::FETCH_ASSOC);
 
-            if ($row_check_guardian && !empty($row_check_guardian['has_guardian'])) {
+            if ($row_check_guardian && $row_check_guardian['has_guardian']) {
                 header("Location: guardian.php");
+                exit();
+            }else{
+                header("Location: create_guardian.php");
                 exit();
             }
         } else {
