@@ -38,9 +38,9 @@
         e.preventDefault();
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
+          console.log(this.responseText);
           if (this.readyState == 4 && this.status == 200) {
             if (this.responseText == "false") {
-              console.log(this.responseText);
               $('#password').val('');
               $('#password').attr("placeholder", "Incorrect email or password.");
               $('#password').addClass('error');
@@ -54,7 +54,7 @@
         };
         xhttp.open("POST", "login.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("email=" + $("#Email").val() + "&password=" + $("#password").val());
+        xhttp.send("email=" + $("#email").val() + "&password=" + $("#password").val());
       });
     });
   </script>

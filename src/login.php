@@ -38,7 +38,7 @@ $hashedPasswordFromDb = $row['password'];
 
 // Verify the password using password_verify
 if (!password_verify($password, $hashedPasswordFromDb)) {
-    echo "false";
+    echo 'false';
 } else {
     echo "true";
 

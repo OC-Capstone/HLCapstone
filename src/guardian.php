@@ -208,7 +208,7 @@ try {
                     </div>
                     <!-- Column Three -->
                     <div class="flex items-center justify-center">
-                        <a href="#">
+                        <a href="Beneficiary.html">
                             <img src="../res/iconsHL/arrow_next.png" width="150px" height="100px">
                         </a>
                     </div>
