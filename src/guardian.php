@@ -67,6 +67,7 @@ try {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="sidenav.css" rel="stylesheet">
     <style>
         body {
             font-family: "Lato", sans-serif;
@@ -76,50 +77,7 @@ try {
             flex-direction: column;
             min-height: 100vh;
         }
-
-        .sidenav {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 10;
-            background-color: #fff;
-            overflow-x: hidden;
-            transition: 0.5s;
-            /* padding-top: 60px; */
-        }
-
-        .sidenav a {
-            /* padding: 8px 8px 8px 32px; */
-            text-decoration: none;
-            font-size: 25px;
-            /* color: #818181; */
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidenav a:hover {
-            color: #f1f1f1;
-        }
-
-        .sidenav .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-
-        @media screen and (max-height: 450px) {
-            .sidenav {
-                padding-top: 15px;
-            }
-
-            .sidenav a {
-                font-size: 18px;
-            }
-        }
+    
     </style>
 </head>
 
@@ -161,7 +119,7 @@ try {
                                 </span>&nbsp <button id="addGuardianButton"><i class="fas fa-edit"></i></button>
                             </div>
                             <div>
-                                <span class="text-md md:text-lg lg:text-xl"><?php echo $guardian_relationship;?></span>
+                                <span class="text-md md:text-lg lg:text-xl"><?php echo $guardian_relationship; ?></span>
                             </div>
                         </div>
                     </div>
@@ -182,8 +140,8 @@ try {
 
                 </div>
 
-                
-                
+
+
 
             </div>
 
@@ -255,7 +213,7 @@ try {
                 });
             });
         </script>
-    
+
 </body>
 
 </html>

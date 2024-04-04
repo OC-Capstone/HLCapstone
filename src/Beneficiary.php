@@ -60,9 +60,14 @@ try {
 				// Get inserted Beneficiary ID
 				$insertedBeneficiaryId = $conn->lastInsertId(); // Assuming auto-incrementing ID
 
+				// inserting relationship into BeneficiaryRelationship table
+				$sql = "INSERT INTO BeneficiaryRelationship (beneficiary_id, relationshipToDeceased) VALUES (?, ?)";
+				$stmt = $conn->prepare($sql);
+				$stmt->execute([$insertedBeneficiaryId, $beneficiary['relationship']]);
+
 				// Loop through the beneficiary's gifts and insert them (prepared statements)
 				foreach ($beneficiary['gifts'] as $gift) {
-					$sql = "INSERT INTO GIFT (beneficiary_id, name, details) VALUES (?, ?, ?)";
+					$sql = "INSERT INTO GIFT (beneficiary_id, name, giftDetails) VALUES (?, ?, ?)";
 					$stmt = $conn->prepare($sql);
 					$stmt->execute([$insertedBeneficiaryId, $gift['name'], $gift['details']]);
 				}
