@@ -45,7 +45,7 @@ if (!password_verify($password, $hashedPasswordFromDb)) {
     // Close the statement and connection (already done before)
 
     // Fetch last_login from the database
-    $sql = "SELECT last_login FROM USERS WHERE email = ?";
+    $sql = "SELECT last_login, id FROM USERS WHERE email = ?";
     $params = array($email);
     $stmt = sqlsrv_query($conn, $sql, $params);
 
@@ -55,8 +55,10 @@ if (!password_verify($password, $hashedPasswordFromDb)) {
 
     // Fetch the last_login value and handle potential errors
     $last_login = null;
+    $user_id = null;
     if ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
         $last_login = $row['last_login'];
+        $user_id = $row['id'];
     }
 
     if ($last_login) {
@@ -77,6 +79,7 @@ if (!password_verify($password, $hashedPasswordFromDb)) {
         if ($last_login instanceof DateTime) {
             setcookie('last_login', $last_login->format('Y-m-d H:i:s'), time() + 3600, "/");
             setcookie('email', $email, time() + 3600, "/");
+            setcookie('user_id', $user_id, time() + 3600, "/");
 
             echo '<br>' . $last_login->format('Y-m-d H:i:s') . '<br>';
 
