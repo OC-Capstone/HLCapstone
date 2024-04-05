@@ -13,7 +13,7 @@ function benSplit(name, relationship) {
   var newFormDiv = $('<div></div>');
 
   newFormDiv.addClass("w-full").attr('id', uniqueId);
-
+  newFormDiv.addClass(" m-1");
   newFormDiv.html(`
 </head>
 
@@ -77,7 +77,7 @@ function benSplit(name, relationship) {
 
   splitButtons(uniqueMinus, uniqueDisplay, uniquePlus, id);
 
-  
+
   function splitButtons(minusBtnId, displayId, plusBtnId, amount) {
     const display = document.getElementById(displayId);
     const minusBtn = document.getElementById(minusBtnId);
@@ -89,26 +89,44 @@ function benSplit(name, relationship) {
     minusBtn.addEventListener('click', () => {
       if (currentValue > 0) { // Check if currentValue is greater than 0
         currentValue -= 1;
-        totalValue -=1;
+        totalValue -= 1;
         console.log(totalValue + currentValue);
         console.log("Total Value: " + totalValue);
         display.textContent = currentValue + "%";
       }
+      if (totalValue == 100) {
+        $('#confirmBtn').removeClass("bg-gray-300 px-4 py-2 rounded-md cursor-not-allowed opacity-50");
+        $('#confirmBtn').removeAttr("disabled");
+    } else {
+        $('#confirmBtn').addClass("bg-gray-300 px-4 py-2 rounded-md cursor-not-allowed opacity-50");
+        $('#confirmBtn').prop('disabled', true);
+    }
+    
     });
 
     plusBtn.addEventListener('click', () => {
-       // Get the current total value
+      // Get the current total value
       if (totalValue < 100) { // Check if total + current value is less than 100
         currentValue += 1;
-        totalValue +=1;
+        totalValue += 1;
         console.log(totalValue + currentValue);
         console.log("Total Value: " + totalValue);
         display.textContent = currentValue + "%";
       } else {
         console.warn("Cannot add more, total would exceed 100%");
       }
+      if (totalValue == 100) {
+        $('#confirmBtn').removeClass("bg-gray-300 px-4 py-2 rounded-md cursor-not-allowed opacity-50");
+        $('#confirmBtn').removeAttr("disabled");
+    } else {
+        $('#confirmBtn').addClass("bg-gray-300 px-4 py-2 rounded-md cursor-not-allowed opacity-50");
+        $('#confirmBtn').prop('disabled', true);
+    }
+    
     });
+
+
   }
-  
-  
+
+
 }
