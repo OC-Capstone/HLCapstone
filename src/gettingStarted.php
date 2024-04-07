@@ -41,46 +41,15 @@
 
                     <div class="bg-white flex justify-center items-start mt-12">
                         <form class="text-center" id="myForm1">
+                        <label for="bordered-radio-2" class="flex items-center ps-4 border ml-3 border-gray-200 rounded dark:border-gray-700">
+                                <input id="bordered-radio-2" type="radio" value="" name="bordered-radio" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="checkRadio()">
+                                <label for="bordered-radio-2" class="w-full py-4 ms-2 text-sm ml-5 mr-5 font-medium text-gray-900 dark:text-gray-300">No</label>
+                            </label>
 
                             <label for="bordered-radio-1" class="flex items-center ps-4 border ml-3 border-gray-200 rounded dark:border-gray-700">
                                 <input id="bordered-radio-1" type="radio" value="" name="bordered-radio" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="checkRadio()">
                                 <label for="bordered-radio-1" class="w-full py-4 ms-2 text-sm ml-5 mr-5 font-medium text-gray-900 dark:text-gray-300">Yes</label>
                             </label>
-
-                            <label for="bordered-radio-2" class="flex items-center ps-4 border ml-3 border-gray-200 rounded dark:border-gray-700">
-                                <input id="bordered-radio-2" type="radio" value="" name="bordered-radio" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="checkRadio()">
-                                <label for="bordered-radio-2" class="w-full py-4 ms-2 text-sm ml-5 mr-5 font-medium text-gray-900 dark:text-gray-300">No</label>
-                            </label>
-                        </form>
-                    </div>
-                </form>
-
-                <div class="h-1 bg-gray-200 rounded mt-12 mb-12 "></div>
-
-                <!---question 2-->
-
-                <!--gray border-->
-
-                <form class="text-center" id="myForm2">
-                    <div class="mb-4">
-                        <label>How would you like your estate assets to be allocated?<br>
-                            <br> To a single primary beneficiary (with option to percentage split between alternate beneficiaries).
-                            <br>
-                            <br> As a percentage split between multiple beneficiaries. </label>
-                    </div>
-                    <div class="bg-white flex justify-center items-start mt-12 mb-12 ">
-                        <form class="text-center" id="myForm2">
-
-                            <label for="bordered-radio-3" class="flex items-center ps-4 border ml-3 border-gray-200 rounded dark:border-gray-700">
-                                <input id="bordered-radio-3" type="radio" value="" name="bordered-radio2" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="checkRadio()">
-                                <label for="bordered-radio-3" class="w-full py-4 ms-2 text-sm ml-5 mr-5 font-medium text-gray-900 dark:text-gray-300">Primary and alternate</label>
-                            </label>
-
-                            <label for="bordered-radio-4" class="flex items-center ps-4 border ml-3 border-gray-200 rounded dark:border-gray-700">
-                                <input id="bordered-radio-4" type="radio" value="" name="bordered-radio2" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="checkRadio()">
-                                <label for="bordered-radio-4" class="w-full py-4 ms-2 text-sm ml-5 mr-5 font-medium text-gray-900 dark:text-gray-300">Percent split</label>
-                            </label>
-
                         </form>
                     </div>
                 </form>
@@ -117,8 +86,8 @@
 
     <script>
     function checkRadio() {
-        var radioButtons1 = document.getElementsByName("bordered-radio");
-        var radioButtons2 = document.getElementsByName("bordered-radio2");
+        var radioButtons1 = document.getElementsByName("bordered-radio-1");
+        var radioButtons2 = document.getElementsByName("bordered-radio-2");
         var nextButton = document.getElementById("nextButton");
         var selected1 = false;
         var selected2 = false;
@@ -127,14 +96,6 @@
         for (var i = 0; i < radioButtons1.length; i++) {
             if (radioButtons1[i].checked) {
                 selected1 = true;
-                break;
-            }
-        }
-
-        // Check which radio button is selected for the second group
-        for (var i = 0; i < radioButtons2.length; i++) {
-            if (radioButtons2[i].checked) {
-                selected2 = true;
                 break;
             }
         }
@@ -152,6 +113,6 @@
             nextButton.disabled = true;
         }
     }
-</script>
+</script>x
 </body>
 </html>
