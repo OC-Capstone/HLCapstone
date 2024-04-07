@@ -38,12 +38,21 @@
           class="self-stretch h-12 mt-1 px-3 mb-12 py-2 bg-white rounded-none border border-black flex justify-center items-center gap-3">
           + Add New beneficiary
         </button>
-        <div class="hidden flex-col flex flex-start" id="beneficiaryListDiv">
+        <div class="hidden flex-col flex justify-center" id="beneficiaryListDiv">
           <select id="beneficiaryList" size="3">
           </select>
-          <button id="getSelectedOption">Get Selected Option</button>
+          <div class=" flex justify-center">
+            <button
+              class="m-3 w-1/5  justify-center bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+              id="getSelectedOption">Get Selected Option</button>
+          </div>
+        </div>
+        <div class=" flex justify-center">
+          <button id="confirmBtn" type="button"
+            class="hidden w-1/5 mt-2 mb-3 justify-center bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Confirm</button>
         </div>
       </div>
+
     </div>
 
 
@@ -69,17 +78,10 @@
       </div>
     </div>
 
-
-    <!-- need -->
     <script>
-      // var entryDiv = $("<div>").addClass("w-full max-w-screen-sm h-24 px-12 py-2 mt-12 rounded border border-black flex items-center");
-      // var profilePicture = $("<img>").attr("src", "../res/prof_pic.png").attr("alt", "Profile Picture").addClass("h-full object-contain");
-      // var beneficiaryInfoDiv = $("<div>").addClass("ml-2");
-      // var fullName = $("<p>").text(entry.fullName).addClass("text-lg md:text-xl mb-2 lg:text-2xl");
-      // var relationship = $("<p>").text(entry.relationshipToDeceased).addClass("text-md md:text-lg lg:text-xl");
-
       $(document).ready(function () {
         //function to add a new benficiary to list
+        var beneficiaryArray = [];
         function addBeneficiary(name, relation) {
           // Create a new option element
           var option = $('<option></option>');
@@ -95,24 +97,47 @@
 
         $('#getSelectedOption').click(function () {
           // Get the selected option
-          var selectedOption = $('#beneficiaryList').find('option:selected');
+          if ($('#beneficiaryList option:selected').length > 0) {
+            // Get the selected option
+            var selectedOption = $('#beneficiaryList').find('option:selected');
 
-          // Get the name and relationship from the selected option
-          var selectedName = selectedOption.text().split(' - ')[0]; // Extract name
-          var selectedRelation = selectedOption.text().split(' - ')[1]; // Extract relationship
+            // Get the name and relationship from the selected option
+            var selectedName = selectedOption.text().split(' - ')[0]; // Extract name
+            var selectedRelation = selectedOption.text().split(' - ')[1]; // Extract relationship
 
-          // Log the selected name and relationship (you can modify this as needed)
-          //What happens when you click GET SELECTED OPTION after clicking a beneficiary in list 
-          alert("Selected Name: " + selectedName + "\n" + "Selected Relationship: " + selectedRelation);
-          benSplit(selectedName, selectedRelation);
-          
+            // Log the selected name and relationship (you can modify this as needed)
+            // What happens when you click GET SELECTED OPTION after clicking a beneficiary in list 
+            benSplit(selectedName, selectedRelation);
+
+            // Empty object to store beneficiary data
+            // Array to store multiple beneficiaries
+            var beneficiary = {};
+            // Assign values to properties of the beneficiary object
+            
+
+
+            // Push the beneficiary object into the beneficiaryArray
+
+            beneficiaryArray.push({
+              name: selectedName,
+              relationship: selectedRelation,
+              split: '',
+            });
+            $('#confirmBtn').removeClass("hidden");
+            console.log(beneficiaryArray); // Log the beneficiaryArray to the console
+
+
+
+
+          } else {
+            // Handle the case when no option is selected (you can modify this as needed)
+            alert("Please select a beneficiary.");
+          }
         });
         //clicking the add new beneficiary button
         $('#beneficiaryListBTN').click(function () {
-          console.log("button");
           //hiding add new beneficiary button
-          $('#beneficiaryListBTN').addClass("hidden");
-          $('#beneficiarybtnDiv').removeClass("flex");
+
 
           xhttp = new XMLHttpRequest();
           xhttp.onreadystatechange = function () {
@@ -126,6 +151,8 @@
                 console.log(firstname + " " + relationship);
                 addBeneficiary(firstname, relationship);
               });
+              $('#beneficiaryListBTN').addClass("hidden");
+              $('#beneficiarybtnDiv').removeClass("flex");
             } else {
 
             }
@@ -133,10 +160,37 @@
 
           xhttp.open("POST", "beneficiarySplit.php", true);
           xhttp.send();
+
         });
 
         //getselected option from list box.
-        
+        $('#confirmBtn').click(function () {
+
+          beneficiaryArray.forEach(beneficiary => {
+            beneficiary.split = parseFloat($(`#display${beneficiaryArray.indexOf(beneficiary) + 2}`).text());
+          });
+          // Send the data via AJAX
+
+          var data = {
+            beneficiaries: beneficiaryArray
+          };
+          console.log(data);
+
+          $.ajax({
+            url: 'getSplitInfo.php', // Replace with your PHP file path
+            type: 'POST',
+            data: JSON.stringify(data), // Convert object to JSON string
+            contentType: 'application/json', // Set content type
+            success: function (response) {
+              console.log(response); // Handle response from PHP script
+              // You can also display a success message or redirect the page here
+              alert(response);
+            },
+            error: function (error) {
+              console.error(error); // Handle errors during submission
+            }
+          });
+        });
 
       });
     </script>
