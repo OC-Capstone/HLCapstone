@@ -166,15 +166,15 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
   <!-- Container -->
   <div>
     <!-- Header -->
-    <div class="fixed top-0 left-0 w-full h-16 bg-red-600 flex justify-between items-center px-4 z-1">
-            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-            <div id="title" class="text-white font-lato font-bold text-shadow-md text-2xl sm:text-4xl md:text-4xl" style="font-family: 'Lato', sans-serif; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
-                Testamentary Wishes
-            </div>
-            <a href="#">
-                <i class="fa-solid fa-trash text-white text-4xl"></i>
-            </a>
-        </div>
+    <div class="fixed top-0 left-0 w-full h-16 bg-red-600 flex justify-between items-center px-4 z-10">
+      <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+      <div id="title" class="text-white font-lato font-bold text-shadow-md text-2xl sm:text-4xl md:text-4xl" style="font-family: 'Lato', sans-serif; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
+        Testamentary Wishes
+      </div>
+      <a href="#">
+        <i class="fa-solid fa-trash text-white text-4xl"></i>
+      </a>
+    </div>
 
     <div class="mx-4 items-center mt-20 h-full">
       <div id="main_div">
@@ -187,51 +187,32 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
             <!--important button-->
 
             <button type="button" id="addGuardianButton" class=" self-stretch h-12 mt-1 px-3 mb-12 py-2 bg-white rounded-none border border-black flex justify-center items-center gap-3">
-              + Add New Gift beneficiary
+              + Add New Gift Beneficiary
             </button>
           </div>
 
           <!-- submit button for, idek anymore -->
-          <button type="submit" id="submitBTN" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-auto block mb-2">
+          <button type="submit" id="submitBTN" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-auto block mb-12">
             Submit
           </button>
         </form>
 
-        <!-- Hidden Form -->
-        <div id="guardianForm" class="hidden w-full px-3 py-2 bg-white rounded flex-col justify-center items-center gap-3">
-          <form id="guardianFormSubmit">
-            <input type="text" name="fname" id="fname" placeholder="First Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2 text-center" required value="<?php echo $guardian_first_name; ?>">
-            <input type="text" name="mname" id="mname" placeholder="Middle Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2 text-center" value="<?php echo $guardian_middle_name; ?>">
-            <input type="text" name="lname" id="lname" placeholder="Last Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2 text-center" required value="<?php echo $guardian_last_name; ?>">
-            <input type="text" name="relationship" id="relationship" placeholder="Relationship to You" class="w-full mb-2 border border-gray-300 rounded px-3 py-2 text-center" required value="<?php echo $guardian_relationship; ?>">
-            <button type="submit" class="text-black bg-green-200 w-full self-stretch h-12 px-3 py-2 bg-white rounded border border-black justify-center items-center gap-3 inline-flex text-center">
-              Save Guardian
-            </button>
-          </form>
-        </div>
-        <!-- End of Hidden Form -->
-
         <!--footer-->
-        <div class="relative ">
-          <div class="footer w-full h-32 bg-white relative inset-x-0 flex justify-center grid grid-cols-3 gap-4">
-
+        <!-- Footer -->
+        <div class="fixed bottom-0 w-full h-32 bg-white flex">
+          <div class=" w-full h-32 flex justify-center grid grid-cols-3 gap-4 bg-white">
             <div class="flex items-center justify-center">
-
-              <a href="<?php echo $_SESSION['selected_radio']; ?>">
-                <script>
-                  console.log("<?php echo $selected_radio; ?>");
-                </script>
+              <a href="dashboard.php">
                 <img src="../res/iconsHL/arrow_back.png" width="150px" height="100px">
               </a>
             </div>
-            <div class="flex flex-col items-center">
-              <div class="h-1/4 flex items-center justify-center">
 
+            <div class="flex flex-col">
+              <div class="h-3/4 flex items-center justify-center" style="background-image: url('../res/iconsHL/step3.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
               </div>
-              <div class="h-3/4 flex items-center justify-center"><img src="../res/iconsHL/step3.png"></div>
             </div>
             <div class="flex items-center justify-center">
-              <a href="questionPage.php">
+              <a id='nextbtn' href="questionPage.php">
                 <img src="../res/iconsHL/arrow_next.png" width="150px" height="100px">
               </a>
             </div>
