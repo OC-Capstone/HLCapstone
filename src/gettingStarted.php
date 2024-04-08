@@ -105,7 +105,8 @@ session_start();
                 if (radioButtons1[0].checked) {
                     nextButton.parentElement.href = "BeneficiaryPage.php?selected_no=gettingStarted.php";
                 } else if (radioButtons1[1].checked) {
-                    nextButton.parentElement.href = "guardian.php?selected_yes=guardian.php";
+                    //nextButton.parentElement.href = "guardian.php?selected_yes=guardian.php";
+                    nextButton.parentElement.href = "guardian_redirect.php";
                 }
                 nextButton.disabled = false;
             } else {
