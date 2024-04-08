@@ -239,8 +239,6 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
       newFormDiv.classList.add('beneficiary', 'w-full', 'px-3', 'py-2', 'bg-white', 'rounded', 'border', 'border-black', 'flex-col', 'gap-3', 'mt-4', 'mb-12', 'top-10', 'relative');
       newFormDiv.setAttribute('data-id', uniqueId);
       newFormDiv.innerHTML = `
-    
-        <i class="fas fa-trash text-black text-lg absolute top-0 right-0 mr-3 mt-3 cursor-pointer"></i> 
 
         <div class=" flex w-full items-center">
             <div class=" w-full  h-24 px-3 py-2  bg-white flex items-center">
