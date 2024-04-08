@@ -17,5 +17,6 @@
  | 0.12 | 3/22/2024 | fixed register page first name input size | Cade |
  | 0.13 | 3/28/2024 | Lowercase, trim, add dashes to guardian | Luke |
  | 0.14 | 3/28/2024 | normalized DB, fixed php queries, changed error box in login, and register. | Cade |
- | 0.14 | 3/28/2024 | backend for testementary drawer | Cade/liam |
- | 0.15 | 4/2/2024 | Fixed getting userID with cookies | Luke |
+ | 0.15 | 3/28/2024 | backend for testementary drawer | Cade/liam |
+ | 0.16 | 4/2/2024 | Fixed getting userID with cookies | Luke |
+ | 0.17 | 4/7/2024 | Created summary and confirmation | Luke |
