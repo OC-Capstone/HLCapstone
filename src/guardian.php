@@ -6,6 +6,13 @@ if (!isset($_COOKIE['email'])) {
     header("Location: login.html");
     exit();
 }
+session_start();
+
+if (isset($_GET['selected_yes'])) {
+    $_SESSION['selected_radio'] = $_GET['selected_yes'];
+    
+}
+
 // Initialize variables to store guardian data
 $guardian_first_name = "";
 $guardian_middle_name = "";
@@ -77,7 +84,6 @@ try {
             flex-direction: column;
             min-height: 100vh;
         }
-    
     </style>
 </head>
 
@@ -166,7 +172,7 @@ try {
                     </div>
                     <!-- Column Three -->
                     <div class="flex items-center justify-center">
-                        <a href="Beneficiary.html">
+                        <a href="BeneficiaryPage.php">
                             <img src="../res/iconsHL/arrow_next.png" width="150px" height="100px">
                         </a>
                     </div>

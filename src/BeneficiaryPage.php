@@ -1,3 +1,32 @@
+<?php
+session_start();
+
+// Check if the user has selected "no" or "yes"
+if (isset($_GET['selected_no'])) {
+  $_SESSION['selected_radio'] = $_GET['selected_no'];
+} elseif (isset($_GET['selected_yes'])) {
+  $_SESSION['selected_radio'] = $_GET['selected_yes'];
+}
+
+// Check if the user has navigated back from the Beneficiary Page
+if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'BeneficiaryPage.php') !== false) {
+
+  // User navigated back from Beneficiary Page
+  if ($_SESSION['selected_radio'] == 'gettingStarted.php') {
+    // Redirect to Getting Started Page only if the referer is not the gettingStarted page
+    if (strpos($_SERVER['HTTP_REFERER'], 'gettingStarted.php') === false) {
+      header("Location: gettingStarted.php");
+      exit();
+    }
+  } else {
+    // Redirect to Guardian Page
+    header("Location: guardian.php");
+    exit();
+  }
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,21 +39,21 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script>
-    $(document).ready(function (e){
-                xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        if (this.responseText == "false") {
-                            console.log(this.responseText);
-                            window.location.href = "login.html";
-                        } else {
-                            console.log(this.responseText);
-                        }
-                    }
-                };
-                xhttp.open("POST", "checkCookie.php", true);
-                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.send();
+    $(document).ready(function(e) {
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          if (this.responseText == "false") {
+            console.log(this.responseText);
+            window.location.href = "login.html";
+          } else {
+            console.log(this.responseText);
+          }
+        }
+      };
+      xhttp.open("POST", "checkCookie.php", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send();
     });
   </script>
   <script>
@@ -51,29 +80,27 @@
       };
       beneficiaries[beneficiaryIndex].gifts.push(gift);
     }
-
-
   </script>
   <script>
-    $(document).ready(function (e) {
+    $(document).ready(function(e) {
 
-      $("form").submit(function (e) {
+      $("form").submit(function(e) {
         e.preventDefault(); // Prevent default form submission
 
         var beneficiaries = []; // Empty array to hold beneficiary objects
 
         // Loop through beneficiary sections in the form
-        $(".beneficiary").each(function () {
+        $(".beneficiary").each(function() {
           var beneficiaryId = $(this).data('id'); // Get unique ID from HTML
           var name = $(this).find("#fullBeneficiaryName").val();
           var relationship = $(this).find("#relationship").val();
           var financialGift = $(this).find("#amount").val();
-          
+
 
           var gifts = []; // Empty array to hold gift objects
 
           // Loop through gift sections within the beneficiary section
-          $(this).find(".gift").each(function () {
+          $(this).find(".gift").each(function() {
             var giftName = $(this).find("#giftName").val();
             var giftDetails = $(this).find("#giftDetails").val();
 
@@ -105,12 +132,12 @@
           type: 'POST',
           data: JSON.stringify(data), // Convert object to JSON string
           contentType: 'application/json', // Set content type
-          success: function (response) {
+          success: function(response) {
             console.log(response); // Handle response from PHP script
             // You can also display a success message or redirect the page here
             alert(response);
           },
-          error: function (error) {
+          error: function(error) {
             console.error(error); // Handle errors during submission
           }
         });
@@ -118,8 +145,8 @@
     });
   </script>
   <script>
-    $(document).ready(function () {
-      $(".close").click(function () {
+    $(document).ready(function() {
+      $(".close").click(function() {
         $('#popup').addClass('hidden');
       });
     });
@@ -151,15 +178,13 @@
 
             <!--important button-->
 
-            <button type="button" id="addGuardianButton"
-              class=" self-stretch h-12 mt-1 px-3 mb-12 py-2 bg-white rounded-none border border-black flex justify-center items-center gap-3">
+            <button type="button" id="addGuardianButton" class=" self-stretch h-12 mt-1 px-3 mb-12 py-2 bg-white rounded-none border border-black flex justify-center items-center gap-3">
               + Add New Gift beneficiary
             </button>
           </div>
 
           <!-- submit button for, idek anymore -->
-          <button type="submit" id="submitBTN"
-            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-auto block mb-2">
+          <button type="submit" id="submitBTN" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-auto block mb-2">
             Submit
           </button>
         </form>
@@ -169,7 +194,11 @@
           <div class="footer w-full h-32 bg-white relative inset-x-0 flex justify-center grid grid-cols-3 gap-4">
 
             <div class="flex items-center justify-center">
-              <a href="guardian.php">
+
+              <a href="<?php echo $_SESSION['selected_radio']; ?>">
+                <script>
+                  console.log("<?php echo $selected_radio; ?>");
+                </script>
                 <img src="../res/iconsHL/arrow_back.png" width="150px" height="100px">
               </a>
             </div>
@@ -198,14 +227,13 @@
     function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
     }
-
   </script>
 
 
 
 
   <script>
-    document.getElementById('addGuardianButton').addEventListener('click', function () {
+    document.getElementById('addGuardianButton').addEventListener('click', function() {
       var uniqueId = Math.random().toString(36).substr(2, 9);
       var newFormDiv = document.createElement('div');
       newFormDiv.classList.add('beneficiary', 'w-full', 'px-3', 'py-2', 'bg-white', 'rounded', 'border', 'border-black', 'flex-col', 'gap-3', 'mt-4', 'mb-12', 'top-10', 'relative');
@@ -275,12 +303,12 @@
       parentElement.insertBefore(newFormDiv, this);
 
       var deleteIcon = newFormDiv.querySelector('.fa-trash');
-      deleteIcon.addEventListener('click', function () {
+      deleteIcon.addEventListener('click', function() {
         parentElement.removeChild(newFormDiv);
       });
 
       var addGiftButton = newFormDiv.querySelector('.addGiftButton');
-      addGiftButton.addEventListener('click', function () {
+      addGiftButton.addEventListener('click', function() {
         var newGiftDiv = document.createElement('div');
         newGiftDiv.classList.add('gift', 'w-full', 'h-full', 'px-3', 'py-2', 'bg-white', 'rounded', 'border', 'border-black', 'justify-start', 'items-start', 'gap-3', 'inline-flex', 'mb-1', 'relative');
         newGiftDiv.innerHTML = `
@@ -297,12 +325,11 @@
         parentContainer.appendChild(newGiftDiv);
 
         var deleteIcon = newGiftDiv.querySelector('.fa-trash');
-        deleteIcon.addEventListener('click', function () {
+        deleteIcon.addEventListener('click', function() {
           parentContainer.removeChild(newGiftDiv);
         });
       });
     });
-
   </script>
 
 </body>
