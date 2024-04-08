@@ -9,14 +9,29 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      /* other styles... */
+    }
+  </style>
 </head>
 
-<body class="bg-white font-sans">
-  <div id="mySidenav" class="sidenav">
-
-  </div>
+<body class="bg-white">
   <!-- Container -->
-  <div>
+
+  <div class="flex flex-col h-screen">
     <!-- Header -->
     <div class="fixed top-0 left-0 w-full h-16 bg-red-600 flex justify-between items-center px-4 z-1">
       <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
@@ -30,171 +45,176 @@
     </div>
 
     <!-- main-->
-
-    <div id="main_div" class="border-2 text-gray-700 rounded-lg p-4 mt-12 max-w-5/6"
-      style="min-height: calc(100vh - 14rem)">
-      <div id="beneficiarybtnDiv" class="flex flex-col items-center justify-top h-screen">
-        <button type="button" id="beneficiaryListBTN"
-          class="self-stretch h-12 mt-1 px-3 mb-12 py-2 bg-white rounded-none border border-black flex justify-center items-center gap-3">
-          + Add New beneficiary
-        </button>
-        <div class="hidden flex-col flex justify-center" id="beneficiaryListDiv">
-          <select id="beneficiaryList" size="3">
-          </select>
+    <div class="mx-4 flex-1 items-center mt-20 h-full">
+      <div id="main_div" class="border-2 text-gray-700 rounded-lg p-4  max-w-5/6"
+        style="min-height: calc(100vh - 16rem)">
+        <div id="beneficiarybtnDiv" class="flex flex-col items-center justify-top">
+          <button type="button" id="beneficiaryListBTN"
+            class="self-stretch h-12 mt-1 px-3 mb-12 py-2 bg-white rounded-none border rounded border-black flex justify-center items-center gap-3">
+            + Add New Beneficiary
+          </button>
+          <div class="hidden flex-col flex justify-center" id="beneficiaryListDiv">
+            <select id="beneficiaryList" size="3">
+            </select>
+            <div class=" flex justify-center">
+              <button
+                class="self-stretch h-12 mt-1 px-3 mb-12 py-2 bg-white rounded-none border rounded border-black flex justify-center items-center gap-3 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                id="getSelectedOption">Get Selected Option</button>
+            </div>
+          </div>
           <div class=" flex justify-center">
-            <button
-              class="m-3 w-1/5  justify-center bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-              id="getSelectedOption">Get Selected Option</button>
+            <button id="confirmBtn" type="button"
+              class="hidden self-stretch h-12 mt-1 px-3 py-2 bg-white mb-32 rounded-none border rounded border-black flex justify-center items-center gap-3 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Confirm</button>
           </div>
         </div>
-        <div class=" flex justify-center">
-          <button id="confirmBtn" type="button"
-            class="hidden w-1/5 mt-2 mb-3 justify-center bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Confirm</button>
+
+      </div>
+
+
+
+
+
+      <!-- Footer -->
+      <div class="fixed bottom-0 w-full h-32 bg-white flex">
+        <div class=" w-full h-32 flex justify-center grid grid-cols-3 gap-4 bg-white">
+          <div class="flex items-center justify-center">
+            <a href="dashboard.php">
+              <img src="../res/iconsHL/arrow_back.png" width="150px" height="100px">
+            </a>
+          </div>
+
+          <div class="flex flex-col">
+            <div class="h-3/4 flex items-center justify-center"
+              style="background-image: url('../res/iconsHL/step3.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+            </div>
+          </div>
+          <div class="flex items-center justify-center">
+            <a id='nextbtn'>
+              <img src="../res/iconsHL/arrow_next.png" width="150px" height="100px">
+            </a>
+          </div>
         </div>
       </div>
-
     </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      //function to add a new benficiary to list
+      var beneficiaryArray = [];
+      function addBeneficiary(name, relation) {
+        // Create a new option element
+        var option = $('<option></option>');
+
+        // Set the text and value of the option
+        option.text(name + " - " + relation);
+        option.val(name); // Set the value to the beneficiary's name (you can adjust this as needed)
+
+        // Append the option to the dropdown list
+        $('#beneficiaryList').append(option);
+        $('#beneficiaryListDiv').removeClass("hidden");
+      }
+
+      $('#getSelectedOption').click(function () {
+        // Get the selected option
+        if ($('#beneficiaryList option:selected').length > 0) {
+          // Get the selected option
+          var selectedOption = $('#beneficiaryList').find('option:selected');
+
+          // Get the name and relationship from the selected option
+          var selectedName = selectedOption.text().split(' - ')[0]; // Extract name
+          var selectedRelation = selectedOption.text().split(' - ')[1]; // Extract relationship
+
+          // Log the selected name and relationship (you can modify this as needed)
+          // What happens when you click GET SELECTED OPTION after clicking a beneficiary in list 
+          benSplit(selectedName, selectedRelation);
+
+          // Empty object to store beneficiary data
+          // Array to store multiple beneficiaries
+          var beneficiary = {};
+          // Assign values to properties of the beneficiary object
+
+
+
+          // Push the beneficiary object into the beneficiaryArray
+
+          beneficiaryArray.push({
+            name: selectedName,
+            relationship: selectedRelation,
+            split: '',
+          });
+          $('#confirmBtn').removeClass("hidden");
+          console.log(beneficiaryArray); // Log the beneficiaryArray to the console
 
 
 
 
-    <div class="footer w-full h-32 bg-white absolute bottom-0 inset-x-0 flex justify-center grid grid-cols-3 gap-4">
+        } else {
+          // Handle the case when no option is selected (you can modify this as needed)
+          alert("Please select a beneficiary.");
+        }
+      });
+      //clicking the add new beneficiary button
+      $('#beneficiaryListBTN').click(function () {
+        //hiding add new beneficiary button
 
-      <div class="flex items-center justify-center">
-        <a href="beneficiaryPage.php">
-          <img src="../res/iconsHL/arrow_back.png" width="150px" height="100px">
-        </a>
-      </div>
-      <div class="flex flex-col items-center">
-        <div class="h-1/4 flex items-center justify-center">
 
-        </div>
-        <div class="h-3/4 flex items-center justify-center"><img src="../res/iconsHL/dots.jpg"></div>
-      </div>
-      <div class="flex items-center justify-center">
-        <a href="">
-          <img src="../res/iconsHL/arrow_next.png" width="150px" height="100px">
-        </a>
-      </div>
-    </div>
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            //array from php using JSON
+            var jsonData = JSON.parse(this.responseText);
 
-    <script>
-      $(document).ready(function () {
-        //function to add a new benficiary to list
-        var beneficiaryArray = [];
-        function addBeneficiary(name, relation) {
-          // Create a new option element
-          var option = $('<option></option>');
+            jsonData.forEach(function (item) {
+              var firstname = item.firstname;
+              var relationship = item.relationshipToDeceased;
+              console.log(firstname + " " + relationship);
+              addBeneficiary(firstname, relationship);
+            });
+            $('#beneficiaryListBTN').addClass("hidden");
+            $('#beneficiarybtnDiv').removeClass("flex");
+          } else {
 
-          // Set the text and value of the option
-          option.text(name + " - " + relation);
-          option.val(name); // Set the value to the beneficiary's name (you can adjust this as needed)
-
-          // Append the option to the dropdown list
-          $('#beneficiaryList').append(option);
-          $('#beneficiaryListDiv').removeClass("hidden");
+          }
         }
 
-        $('#getSelectedOption').click(function () {
-          // Get the selected option
-          if ($('#beneficiaryList option:selected').length > 0) {
-            // Get the selected option
-            var selectedOption = $('#beneficiaryList').find('option:selected');
-
-            // Get the name and relationship from the selected option
-            var selectedName = selectedOption.text().split(' - ')[0]; // Extract name
-            var selectedRelation = selectedOption.text().split(' - ')[1]; // Extract relationship
-
-            // Log the selected name and relationship (you can modify this as needed)
-            // What happens when you click GET SELECTED OPTION after clicking a beneficiary in list 
-            benSplit(selectedName, selectedRelation);
-
-            // Empty object to store beneficiary data
-            // Array to store multiple beneficiaries
-            var beneficiary = {};
-            // Assign values to properties of the beneficiary object
-            
-
-
-            // Push the beneficiary object into the beneficiaryArray
-
-            beneficiaryArray.push({
-              name: selectedName,
-              relationship: selectedRelation,
-              split: '',
-            });
-            $('#confirmBtn').removeClass("hidden");
-            console.log(beneficiaryArray); // Log the beneficiaryArray to the console
-
-
-
-
-          } else {
-            // Handle the case when no option is selected (you can modify this as needed)
-            alert("Please select a beneficiary.");
-          }
-        });
-        //clicking the add new beneficiary button
-        $('#beneficiaryListBTN').click(function () {
-          //hiding add new beneficiary button
-
-
-          xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-              //array from php using JSON
-              var jsonData = JSON.parse(this.responseText);
-
-              jsonData.forEach(function (item) {
-                var firstname = item.firstname;
-                var relationship = item.relationshipToDeceased;
-                console.log(firstname + " " + relationship);
-                addBeneficiary(firstname, relationship);
-              });
-              $('#beneficiaryListBTN').addClass("hidden");
-              $('#beneficiarybtnDiv').removeClass("flex");
-            } else {
-
-            }
-          }
-
-          xhttp.open("POST", "beneficiarySplit.php", true);
-          xhttp.send();
-
-        });
-
-        //getselected option from list box.
-        $('#confirmBtn').click(function () {
-
-          beneficiaryArray.forEach(beneficiary => {
-            beneficiary.split = parseFloat($(`#display${beneficiaryArray.indexOf(beneficiary) + 2}`).text());
-          });
-          // Send the data via AJAX
-
-          var data = {
-            beneficiaries: beneficiaryArray
-          };
-          console.log(data);
-
-          $.ajax({
-            url: 'getSplitInfo.php', // Replace with your PHP file path
-            type: 'POST',
-            data: JSON.stringify(data), // Convert object to JSON string
-            contentType: 'application/json', // Set content type
-            success: function (response) {
-              console.log(response); // Handle response from PHP script
-              // You can also display a success message or redirect the page here
-              alert(response);
-            },
-            error: function (error) {
-              console.error(error); // Handle errors during submission
-            }
-          });
-        });
+        xhttp.open("POST", "beneficiarySplit.php", true);
+        xhttp.send();
 
       });
-    </script>
-    <script src="beneficiarySplit.js"></script>
+
+      //getselected option from list box.
+      $('#confirmBtn').click(function () {
+
+        beneficiaryArray.forEach(beneficiary => {
+          beneficiary.split = parseFloat($(`#display${beneficiaryArray.indexOf(beneficiary) + 2}`).text());
+        });
+        // Send the data via AJAX
+
+        var data = {
+          beneficiaries: beneficiaryArray
+        };
+        console.log(data);
+
+        $.ajax({
+          url: 'getSplitInfo.php', // Replace with your PHP file path
+          type: 'POST',
+          data: JSON.stringify(data), // Convert object to JSON string
+          contentType: 'application/json', // Set content type
+          success: function (response) {
+            console.log(response); // Handle response from PHP script
+            // You can also display a success message or redirect the page here
+            alert(response);
+          },
+          error: function (error) {
+            console.error(error); // Handle errors during submission
+          }
+        });
+      });
+
+    });
+  </script>
+  <script src="beneficiarySplit.js"></script>
 </body>
 
 </html>
