@@ -1,3 +1,8 @@
+<?php
+session_abort();
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,9 +16,6 @@
 </head>
 
 <body class="bg-white">
-
-
-
 
     <!-- Container -->
     <div>
@@ -32,25 +34,21 @@
         <!---question 1-->
         <div class="w-full flex p-2 justify-center">
             <div class="bg-white flex-col flex justify-center mt-24 p-6 w-5/8 border-4 border-gray-200 rounded-lg">
-
-                <form class="text-center" id="myForm1">
-
+                <form class="text-center" method="POST" id="myForm1">
                     <div class="mb-4">
                         <label>Do you have children you would like to setup guardianship arrangements for? </label>
                     </div>
 
                     <div class="bg-white flex justify-center items-start mt-12">
-                        <form class="text-center" id="myForm1">
-                        <label for="bordered-radio-2" class="flex items-center ps-4 border ml-3 border-gray-200 rounded dark:border-gray-700">
-                                <input id="bordered-radio-2" type="radio" value="" name="bordered-radio" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="checkRadio()">
-                                <label for="bordered-radio-2" class="w-full py-4 ms-2 text-sm ml-5 mr-5 font-medium text-gray-900 dark:text-gray-300">No</label>
-                            </label>
+                        <label for="radio2" class="flex items-center ps-4 border ml-3 border-gray-200 rounded dark:border-gray-700">
+                            <input id="radio2" type="radio" value="gettingStarted.php" name="radioBTN" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="checkRadio()">
+                            <label for="radio2" class="w-full py-4 ms-2 text-sm ml-5 mr-5 font-medium text-gray-900 dark:text-gray-300">No</label>
+                        </label>
 
-                            <label for="bordered-radio-1" class="flex items-center ps-4 border ml-3 border-gray-200 rounded dark:border-gray-700">
-                                <input id="bordered-radio-1" type="radio" value="" name="bordered-radio" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="checkRadio()">
-                                <label for="bordered-radio-1" class="w-full py-4 ms-2 text-sm ml-5 mr-5 font-medium text-gray-900 dark:text-gray-300">Yes</label>
-                            </label>
-                        </form>
+                        <label for="radio1" class="flex items-center ps-4 border ml-3 border-gray-200 rounded dark:border-gray-700">
+                            <input id="radio1" type="radio" value="guardian.php" name="radioBTN" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="checkRadio()">
+                            <label for="radio1" class="w-full py-4 ms-2 text-sm ml-5 mr-5 font-medium text-gray-900 dark:text-gray-300">Yes</label>
+                        </label>
                     </div>
                 </form>
             </div>
@@ -75,6 +73,7 @@
                 <!-- Column Three -->
                 <div class="flex items-center justify-center">
                     <a id="nextLink" href="">
+                        <input type="hidden" id="backVal" name="backVal" value="hi">
                         <button id="nextButton" class="focus:outline-none">
                             <img src="../res/iconsHL/arrow_next.png" width="150px" height="100px">
                         </button>
@@ -85,34 +84,35 @@
     </div>
 
     <script>
-    function checkRadio() {
-        var radioButtons1 = document.getElementsByName("bordered-radio-1");
-        var radioButtons2 = document.getElementsByName("bordered-radio-2");
-        var nextButton = document.getElementById("nextButton");
-        var selected1 = false;
-        var selected2 = false;
+        function checkRadio() {
+            var radioButtons1 = document.getElementsByName("radioBTN");
+            var nextButton = document.getElementById("nextButton");
 
-        // Check which radio button is selected for the first group
-        for (var i = 0; i < radioButtons1.length; i++) {
-            if (radioButtons1[i].checked) {
-                selected1 = true;
-                break;
+            var selected1 = false;
+            var selected2 = false;
+
+            // Check which radio button is selected for the first group
+            for (var i = 0; i < radioButtons1.length; i++) {
+                if (radioButtons1[i].checked) {
+                    selected1 = true;
+                    break;
+                }
+            }
+
+            // Enable or disable the next button based on selection in both groups
+            if (selected1 || selected2) {
+                // Determine the next page based on radio button selections
+                if (radioButtons1[0].checked) {
+                    nextButton.parentElement.href = "BeneficiaryPage.php?selected_no=gettingStarted.php";
+                } else if (radioButtons1[1].checked) {
+                    nextButton.parentElement.href = "guardian.php?selected_yes=guardian.php";
+                }
+                nextButton.disabled = false;
+            } else {
+                nextButton.disabled = true;
             }
         }
-
-        // Enable or disable the next button based on selection in both groups
-        if (selected1 && selected2) {
-            // Determine the next page based on radio button selections
-            if (radioButtons1[0].checked) {
-                nextButton.parentElement.href = "guardian.php";
-            } else if (radioButtons1[1].checked) {
-                nextButton.parentElement.href = "beneficiary.html";
-            }
-            nextButton.disabled = false;
-        } else {
-            nextButton.disabled = true;
-        }
-    }
-</script>x
+    </script>
 </body>
+
 </html>
