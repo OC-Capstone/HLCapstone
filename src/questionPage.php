@@ -12,7 +12,7 @@
 </head>
 
 <body class="bg-white">
-<div id="mySidenav" class="sidenav">
+    <div id="mySidenav" class="sidenav">
         <?php
         include("navbar.html");
         ?>
@@ -44,7 +44,7 @@
                                     <input id="radio2" type="radio" value="beneficiarySplit.php" name="radioBTN" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="checkRadio()">
                                     <label for="radio2" class="w-full py-4 ms-2 text-sm ml-5 mr-5 font-medium text-gray-900 dark:text-gray-300">Percent split</label>
                                 </label>
-        
+
                                 <label for="radio1" class="flex items-center ps-4 border ml-3 border-gray-200 rounded dark:border-gray-700">
                                     <input id="radio1" type="radio" value="BeneficiaryandAlternate.html" name="radioBTN" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="checkRadio()">
                                     <label for="radio1" class="w-full py-4 ms-2 text-sm ml-5 mr-5 font-medium text-gray-900 dark:text-gray-300">Primary and alternate</label>
@@ -55,19 +55,7 @@
                 </form>
             </div>
         </div>
-  <!-- Hidden Form -->
-  <div id="guardianForm" class="hidden w-full px-3 py-2 bg-white rounded flex-col justify-center items-center gap-3">
-                        <form id="guardianFormSubmit">
-                            <input type="text" name="fname" id="fname" placeholder="First Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2 text-center" required value="<?php echo $guardian_first_name; ?>">
-                            <input type="text" name="mname" id="mname" placeholder="Middle Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2 text-center" value="<?php echo $guardian_middle_name; ?>">
-                            <input type="text" name="lname" id="lname" placeholder="Last Name" class="w-full mb-2 border border-gray-300 rounded px-3 py-2 text-center" required value="<?php echo $guardian_last_name; ?>">
-                            <input type="text" name="relationship" id="relationship" placeholder="Relationship to You" class="w-full mb-2 border border-gray-300 rounded px-3 py-2 text-center" required value="<?php echo $guardian_relationship; ?>">
-                            <button type="submit" class="text-black bg-green-200 w-full self-stretch h-12 px-3 py-2 bg-white rounded border border-black justify-center items-center gap-3 inline-flex text-center">
-                                Save Guardian
-                            </button>
-                        </form>
-                    </div>
-                    <!-- End of Hidden Form -->
+
 
         <!-- Footer -->
         <div class="footer w-full h-32 bg-white">
@@ -97,24 +85,24 @@
         </div>
     </div>
     <script>
-            function openNav() {
-                document.getElementById("mySidenav").style.width = "400px";
-            }
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "400px";
+        }
 
-            function closeNav() {
-                document.getElementById("mySidenav").style.width = "0";
-            }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
 
-            const addGuardianButton = document.getElementById('addGuardianButton');
-            const guardianFormFind = document.getElementById('guardianForm');
+        const addGuardianButton = document.getElementById('addGuardianButton');
+        const guardianFormFind = document.getElementById('guardianForm');
 
-            addGuardianButton.addEventListener('click', () => {
-                guardianFormFind.classList.toggle('hidden');
-            });
-        </script>
+        addGuardianButton.addEventListener('click', () => {
+            guardianFormFind.classList.toggle('hidden');
+        });
+    </script>
 
     <script>
-      function checkRadio() {
+        function checkRadio() {
             var radioButtons1 = document.getElementsByName("radioBTN");
             var nextButton = document.getElementById("nextButton");
 
@@ -133,7 +121,7 @@
             if (selected1 || selected2) {
                 // Determine the next page based on radio button selections
                 if (radioButtons1[0].checked) {
-                    nextButton.parentElement.href = "beneficiarySplitPage.php";
+                    nextButton.parentElement.href = "beneficiarySplit.html";
                 } else if (radioButtons1[1].checked) {
                     nextButton.parentElement.href = "BeneficiaryandAlternate.php";
                 }
