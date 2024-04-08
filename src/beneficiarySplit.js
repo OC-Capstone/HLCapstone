@@ -39,17 +39,27 @@ class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 w-full px-3 py-2 bg-white roun
     </div>
 </div>
 <div class="flex items-start justify-center sm:justify-end">
-    <!--Start of Mess-->
 
+    <!--Start of Mess-->
+    
     <div class="flex justify-end items-center">
+    
         <div class="ml-2">
             <div class="text-md md:text-md lg:text-lg text-center">
                 Residue of Estate
             </div>
+
+            <!--trash button-->
+            <i class="fas fa-trash text-black text-lg cursor-pointer" style="float: right;"></i>
+    
             <div
                 class="text-sm md:text-sm lg:text-md text-center items-center justify-center italic">
                 After Gifting
             </div>
+
+           
+           
+
             <!--calculator-->
             <div class="flex items-center mt-7">
 
@@ -122,6 +132,18 @@ class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 w-full px-3 py-2 bg-white roun
         $("#confirmBtn").prop("disabled", true);
       }
     });
+
+    //trash button
+
+    var parentContainer = newFormDiv.find('.beneficiaryListDiv');
+parentContainer.append(newFormDiv);
+
+var deleteIcon = newFormDiv.find('.fa-trash');
+deleteIcon.on('click', function () {
+    newFormDiv.remove();
+});
+
+
 
     plusBtn.addEventListener("click", () => {
       // Get the current total value
