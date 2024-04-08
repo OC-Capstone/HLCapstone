@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+session_start();
 include('config.php'); // Include your database configuration file
 if (!isset($_COOKIE['email'])) {
     header("Location: login.html");
     exit();
 }
-session_start();
+
 
 if (isset($_GET['selected_yes'])) {
     $_SESSION['selected_radio'] = $_GET['selected_yes'];
     
 }
+
 
 // Initialize variables to store guardian data
 $guardian_first_name = "";
