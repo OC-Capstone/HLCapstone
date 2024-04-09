@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('config.php'); // Include your database configuration file
 if (!isset($_COOKIE['email'])) {
     header("Location: login.html");
@@ -13,15 +14,7 @@ try {
     if (isset($_COOKIE['email'])) {
         $logged_email = $_COOKIE['email'];
         echo "Email: " . $logged_email;
-
-        // Check if the user exists
-        $sql_check_user = "SELECT id FROM USERS WHERE email = ?";
-        $stmt_check_user = $conn->prepare($sql_check_user);
-        $stmt_check_user->execute([$logged_email]);
-        $row_check_user = $stmt_check_user->fetch(PDO::FETCH_ASSOC);
-
-        if ($row_check_user) {
-            $user_id = $row_check_user['id'];
+            $user_id = $_COOKIE['user_id'];
             echo "User ID: $user_id";
 
             // Check if has_guardian is filled for the user
@@ -34,15 +27,14 @@ try {
                 exit();
             }
             if ($row_check_guardian && $row_check_guardian['has_guardian']) {
+
                 header("Location: guardian.php");
                 exit();
             }else{
                 header("Location: create_guardian.php");
                 exit();
             }
-        } else {
-            echo "User not found.";
-        }
+
     } else {
         echo "Email cookie not set.";
     }

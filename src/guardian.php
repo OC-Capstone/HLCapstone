@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+session_start();
 include('config.php'); // Include your database configuration file
 if (!isset($_COOKIE['email'])) {
     header("Location: login.html");
     exit();
 }
-session_start();
+
 
 if (isset($_GET['selected_yes'])) {
     $_SESSION['selected_radio'] = $_GET['selected_yes'];
-    
 }
+
 
 // Initialize variables to store guardian data
 $guardian_first_name = "";
@@ -75,16 +76,7 @@ try {
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="sidenav.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: "Lato", sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-    </style>
+    
 </head>
 
 <body class="bg-white">
@@ -145,10 +137,6 @@ try {
                     <!-- End of Hidden Form -->
 
                 </div>
-
-
-
-
             </div>
 
             <!-- Footer -->
@@ -168,7 +156,7 @@ try {
                             <div class="w-64 h-7 text-center text-zinc-600 sm:text-lg md:text-xl font-semibold font-['Open Sans'] underline leading-relaxed italic"></div>
                         </div>
                         <!-- Row Two -->
-                        <div class="h-3/4 flex items-center justify-center" style="background-image: url('../res/iconsHL/step1.png'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                        <div class="h-3/4 flex items-center justify-center" style="background-image: url('../res/iconsHL/step2.png'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
                     </div>
                     <!-- Column Three -->
                     <div class="flex items-center justify-center">

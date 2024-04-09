@@ -330,7 +330,9 @@ try {
             <div class="sticky footer w-full h-32 bg-white flex"> <!-- Adjusted footer class -->
                 <div class=" bottom-0  inset-x-0 w-full h-32 flex justify-center grid grid-cols-3 gap-4 bg-white">
                     <div class="flex items-center justify-center">
+
                         <a href="BeneficiarySplit.html">
+
                             <img src="../res/iconsHL/arrow_back.png" width="150px" height="100px">
                         </a>
                     </div>

@@ -41,6 +41,7 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link href="sidenav.css" rel="stylesheet">
   <script>
     $(document).ready(function(e) {
       xhttp = new XMLHttpRequest();
@@ -159,16 +160,23 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
 
 <body class="bg-white font-sans">
   <div id="mySidenav" class="sidenav">
+    <?php
+    include("navbar.html");
+    ?>
+  </div class="">
+  <div id="mySidenav" class="sidenav">
   </div>
   <!-- Container -->
   <div>
     <!-- Header -->
-    <div class="fixed top-0 left-0 w-full h-16 bg-red-600 flex items-center justify-between px-4 z-10">
-      <span id="menu-icon" style="font-size:30px; cursor:pointer;" onclick="openNav()">&#9776;</span>
-      <div id="title" class="text-white font-bold text-shadow-md text-2xl sm:text-4xl md:text-4xl">
+    <div class="fixed top-0 left-0 w-full h-16 bg-red-600 flex justify-between items-center px-4 z-10">
+      <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+      <div id="title" class="text-white font-lato font-bold text-shadow-md text-2xl sm:text-4xl md:text-4xl" style="font-family: 'Lato', sans-serif; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
         Testamentary Wishes
       </div>
-      <div></div>
+      <a href="#">
+        <i class="fa-solid fa-trash text-white text-4xl"></i>
+      </a>
     </div>
 
     <div class="mx-4 items-center mt-20 h-full">
@@ -182,37 +190,32 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
             <!--important button-->
 
             <button type="button" id="addGuardianButton" class=" self-stretch h-12 mt-1 px-3 mb-12 py-2 bg-white rounded-none border border-black flex justify-center items-center gap-3">
-              + Add New Gift beneficiary
+              + Add New Gift Beneficiary
             </button>
           </div>
 
           <!-- submit button for, idek anymore -->
-          <button type="submit" id="submitBTN" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-auto block mb-2">
+          <button type="submit" id="submitBTN" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-auto block mb-12">
             Submit
           </button>
         </form>
 
-
-        <div class="relative ">
-          <div class="footer w-full h-32 bg-white relative inset-x-0 flex justify-center grid grid-cols-3 gap-4">
-
+        <!--footer-->
+        <!-- Footer -->
+        <div class="fixed bottom-0 w-full h-32 bg-white flex">
+          <div class=" w-full h-32 flex justify-center grid grid-cols-3 gap-4 bg-white">
             <div class="flex items-center justify-center">
-
-              <a href="<?php echo $_SESSION['selected_radio']; ?>">
-                <script>
-                  console.log("<?php echo $selected_radio; ?>");
-                </script>
+              <a href="dashboard.php">
                 <img src="../res/iconsHL/arrow_back.png" width="150px" height="100px">
               </a>
             </div>
-            <div class="flex flex-col items-center">
-              <div class="h-1/4 flex items-center justify-center">
 
+            <div class="flex flex-col">
+              <div class="h-3/4 flex items-center justify-center" style="background-image: url('../res/iconsHL/step3.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
               </div>
-              <div class="h-3/4 flex items-center justify-center"><img src="../res/iconsHL/dots.jpg"></div>
             </div>
             <div class="flex items-center justify-center">
-              <a href="beneficiarySplit.html">
+              <a id='nextbtn' href="questionPage.php">
                 <img src="../res/iconsHL/arrow_next.png" width="150px" height="100px">
               </a>
             </div>
@@ -230,6 +233,13 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
     function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
     }
+
+    const addGuardianButton = document.getElementById('addGuardianButton');
+    const guardianFormFind = document.getElementById('guardianForm');
+
+    addGuardianButton.addEventListener('click', () => {
+      guardianFormFind.classList.toggle('hidden');
+    });
   </script>
 
 
@@ -242,8 +252,6 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
       newFormDiv.classList.add('beneficiary', 'w-full', 'px-3', 'py-2', 'bg-white', 'rounded', 'border', 'border-black', 'flex-col', 'gap-3', 'mt-4', 'mb-12', 'top-10', 'relative');
       newFormDiv.setAttribute('data-id', uniqueId);
       newFormDiv.innerHTML = `
-    
-        <i class="fas fa-trash text-black text-lg absolute top-0 right-0 mr-3 mt-3 cursor-pointer"></i> 
 
         <div class=" flex w-full items-center">
             <div class=" w-full  h-24 px-3 py-2  bg-white flex items-center">

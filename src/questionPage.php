@@ -8,13 +8,15 @@
     <!-- Include Tailwind CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="sidenav.css" rel="stylesheet">
 </head>
 
 <body class="bg-white">
-
-
-
-
+    <div id="mySidenav" class="sidenav">
+        <?php
+        include("navbar.html");
+        ?>
+    </div class="">
     <!-- Container -->
     <div>
         <!-- Header -->
@@ -25,9 +27,8 @@
         </div>
 
         <!---question 2-->
-        <div class="w-full flex p-2 justify-center">
+        <div class="w-full flex p-2 mt-24 justify-center">
             <div class="bg-white flex-col flex justify-center mt-24 p-6 w-5/8 border-4 border-gray-200 rounded-lg">
-                <div class="h-1 bg-gray-200 rounded mt-12 mb-12 "></div>
 
                 <form class="text-center" id="myForm2">
                     <div class="mb-4">
@@ -38,29 +39,30 @@
                     </div>
                     <div class="bg-white flex justify-center items-start mt-12 mb-12 ">
                         <form class="text-center" id="myForm2">
+                            <div class="bg-white flex justify-center items-start mt-12">
+                                <label for="radio2" class="flex items-center ps-4 border ml-3 border-gray-200 rounded dark:border-gray-700">
+                                    <input id="radio2" type="radio" value="beneficiarySplit.php" name="radioBTN" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="checkRadio()">
+                                    <label for="radio2" class="w-full py-4 ms-2 text-sm ml-5 mr-5 font-medium text-gray-900 dark:text-gray-300">Percent split</label>
+                                </label>
 
-                            <label for="bordered-radio-3" class="flex items-center ps-4 border ml-3 border-gray-200 rounded dark:border-gray-700">
-                                <input id="bordered-radio-3" type="radio" value="" name="bordered-radio2" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="checkRadio()">
-                                <label for="bordered-radio-3" class="w-full py-4 ms-2 text-sm ml-5 mr-5 font-medium text-gray-900 dark:text-gray-300">Primary and alternate</label>
-                            </label>
-
-                            <label for="bordered-radio-4" class="flex items-center ps-4 border ml-3 border-gray-200 rounded dark:border-gray-700">
-                                <input id="bordered-radio-4" type="radio" value="" name="bordered-radio2" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="checkRadio()">
-                                <label for="bordered-radio-4" class="w-full py-4 ms-2 text-sm ml-5 mr-5 font-medium text-gray-900 dark:text-gray-300">Percent split</label>
-                            </label>
-
+                                <label for="radio1" class="flex items-center ps-4 border ml-3 border-gray-200 rounded dark:border-gray-700">
+                                    <input id="radio1" type="radio" value="BeneficiaryandAlternate.html" name="radioBTN" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="checkRadio()">
+                                    <label for="radio1" class="w-full py-4 ms-2 text-sm ml-5 mr-5 font-medium text-gray-900 dark:text-gray-300">Primary and alternate</label>
+                                </label>
+                            </div>
                         </form>
                     </div>
                 </form>
             </div>
         </div>
 
+
         <!-- Footer -->
         <div class="footer w-full h-32 bg-white">
             <div class="fixed bottom-0 inset-x-0 w-full h-32 flex justify-center grid grid-cols-3 gap-4 bg-white">
                 <!-- Column One -->
                 <div class="flex items-center justify-center">
-                    <a href="dashboard.php"><img src="../res/iconsHL/arrow_back.png" width="150px" height="100px"></a>
+                    <a href="beneficiaryPage.php"><img src="../res/iconsHL/arrow_back.png" width="150px" height="100px"></a>
                 </div>
                 <!-- Column Two -->
                 <div class=" flex flex-col">
@@ -69,7 +71,7 @@
                         <div class="w-64 h-7 text-center text-zinc-600 sm:text-lg md:text-xl font-semibold italic"></div>
                     </div>
                     <!-- Row Two -->
-                    <div class="h-3/4 flex items-center justify-center" style="background-image: url('../res/iconsHL/step1.png'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                    <div class="h-3/4 flex items-center justify-center" style="background-image: url('../res/iconsHL/step3.png'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
                 </div>
                 <!-- Column Three -->
                 <div class="flex items-center justify-center">
@@ -82,15 +84,31 @@
             </div>
         </div>
     </div>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "400px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+        const addGuardianButton = document.getElementById('addGuardianButton');
+        const guardianFormFind = document.getElementById('guardianForm');
+
+        addGuardianButton.addEventListener('click', () => {
+            guardianFormFind.classList.toggle('hidden');
+        });
+    </script>
 
     <script>
         function checkRadio() {
-            var radioButtons1 = document.getElementsByName("bordered-radio-1");
-            var radioButtons2 = document.getElementsByName("bordered-radio-2");
+            var radioButtons1 = document.getElementsByName("radioBTN");
             var nextButton = document.getElementById("nextButton");
+
             var selected1 = false;
             var selected2 = false;
-    
+
             // Check which radio button is selected for the first group
             for (var i = 0; i < radioButtons1.length; i++) {
                 if (radioButtons1[i].checked) {
@@ -98,18 +116,18 @@
                     break;
                 }
             }
-    
+
             // Enable or disable the next button based on selection in both groups
-            if (selected1 && selected2) {
+            if (selected1 || selected2) {
                 // Determine the next page based on radio button selections
                 if (radioButtons1[0].checked) {
-                    nextButton.parentElement.href = "beneficiarySplit.php";
+                    nextButton.parentElement.href = "beneficiarySplit.html";
                 } else if (radioButtons1[1].checked) {
-                    nextButton.parentElement.href = "BeneficiaryandAlternate.html";
+                    nextButton.parentElement.href = "BeneficiaryandAlternate.php";
                 }
                 nextButton.disabled = false;
             } else {
                 nextButton.disabled = true;
             }
         }
-    </script>x
+    </script>
