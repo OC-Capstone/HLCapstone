@@ -23,9 +23,11 @@ try {
             $stmt_check_guardian->execute([$user_id]);
             $row_check_guardian = $stmt_check_guardian->fetch(PDO::FETCH_ASSOC);
             if($row_check_guardian && $row_check_guardian['has_guardian'] && isset($_GET['selected_yes'])){
-                header("Location: guardian.php?selected_yes=guardian_redirect.php");
+                header("Location: guardian.php?selected_yes=guardian.php");
                 exit();
-            }else if ($row_check_guardian && $row_check_guardian['has_guardian']) {
+            }
+            if ($row_check_guardian && $row_check_guardian['has_guardian']) {
+
                 header("Location: guardian.php");
                 exit();
             }else{

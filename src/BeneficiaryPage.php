@@ -27,6 +27,9 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
 
 
 ?>
+<script>
+  console.log("<?php echo $_SESSION['selected_radio']; ?>");
+</script>
 <!DOCTYPE html>
 <html lang="en">
 

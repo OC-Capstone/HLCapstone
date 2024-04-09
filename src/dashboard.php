@@ -61,7 +61,7 @@ if (!isset($_COOKIE['email'])) {
     <div class="relative">
         <div class="flex flex-col justify-center items-center h-screen p-5">
             <div class="" style="max-width: 400px; width: 100%;">
-                <div class="text-center mt-1 mb-12">
+                <div class="text-center mt-10 md:pb-10 mb-2">
                     <h1 id="welcomeMessage" class="text-center md:text-6xl text-3xl md:mb-5 drop-shadow-2xl" style="font-family: 'Lato', sans-serif; ">Vault drawers
                     </h1>
 
@@ -117,7 +117,7 @@ if (!isset($_COOKIE['email'])) {
                         ?>
                     </p>
                     <!-- <canvas id="testamentaryAssetChart" width="400" height="400"></canvas> -->
-                    <img src="../res/vector.png" alt="vault picture" class="w-90 h-45">
+                    <img src="../res/vector.png" alt="vault picture" class="w-50 h-25">
                 </div>
 
                 <div class="grid grid-cols-3">
