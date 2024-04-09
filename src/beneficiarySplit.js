@@ -1,14 +1,13 @@
 var id = 1;
 var totalValue = 0;
+var amtben = 0;
 function benSplit(name, relationship) {
   // Generate a unique ID
-
+  amtben++;
   var uniqueId = `splitID${id}`;
   id++;
   var uniqueIdName = Math.random().toString(36).substr(2, 9);
   var uniqueIdRelationship = Math.random().toString(36).substr(2, 9);
-  var uniqueMinus = Math.random().toString(36).substr(2, 9);
-  var uniquePlus = Math.random().toString(36).substr(2, 9);
   var uniqueDisplay = `display${id}`;
   var newFormDiv = $("<div></div>");
 
@@ -49,8 +48,7 @@ class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 w-full px-3 py-2 bg-white roun
                 Residue of Estate
             </div>
 
-            <!--trash button-->
-            <i class="fas fa-trash text-black text-lg cursor-pointer" style="float: right;"></i>
+            
     
             <div
                 class="text-sm md:text-sm lg:text-md text-center items-center justify-center italic">
@@ -61,33 +59,12 @@ class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 w-full px-3 py-2 bg-white roun
            
 
             <!--calculator-->
-            <div class="flex items-center mt-7">
-
-                <!--minus button-->
-                <button id="${uniqueMinus}"
-                    class="bg-red-500 text-white font-bold px-6 py-4 border border-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M20 12H4" />
-                    </svg>
-                </button>
-
+            <div class="flex items-center justify-end mt-7 border border-black">
                 <!--display percent make input!!!-->
-                <span id="${uniqueDisplay}"
-                    class="bg-white px-6 py-4 border border-black text-black font-bold inline-flex items-center justify-center">
-                    0%
-                </span>
-
-                <!--plus button-->
-                <button id="${uniquePlus}"
-                    class="bg-green-500 text-white font-bold px-6 py-4 border border-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                </button>
+                <input id="${uniqueDisplay}"
+                    class="bg-white px-6 py-4 w-full focus:outline-none  text-black font-bold" value="0" readonly>
+                    <!--trash button-->
+            <i class="fas fa-trash text-black text-lg pr-2 cursor-pointer" style="float: right;"></i>
             </div>
         </div>
     </div>
@@ -101,73 +78,79 @@ class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 w-full px-3 py-2 bg-white roun
 
   $("#" + uniqueIdName).html(name);
   $("#" + uniqueIdRelationship).html(relationship);
-
-  splitButtons(uniqueMinus, uniqueDisplay, uniquePlus, id);
-
-  function splitButtons(minusBtnId, displayId, plusBtnId, amount) {
+  var firstSpan;
+  var secondSpan;
+  var $benIDIndex;
+  splitButtons(uniqueDisplay, id);
+  newBeneficiary.push({ divID: uniqueId });
+  function splitButtons(minusBtnId, displayId, plusBtnId) {
     const display = document.getElementById(displayId);
     const minusBtn = document.getElementById(minusBtnId);
     const plusBtn = document.getElementById(plusBtnId);
     var currentValue = 0;
-    display.textContent = currentValue + "%";
-
-    minusBtn.addEventListener("click", () => {
-      if (currentValue > 0) {
-        // Check if currentValue is greater than 0
-        currentValue -= 1;
-        totalValue -= 1;
-        console.log(totalValue + currentValue);
-        console.log("Total Value: " + totalValue);
-        display.textContent = currentValue + "%";
-      }
-      if (totalValue == 100) {
-        $("#confirmBtn").removeClass(
-          "bg-gray-300 px-4 py-2 rounded-md cursor-not-allowed opacity-50"
-        );
-        $("#confirmBtn").removeAttr("disabled");
-      } else {
-        $("#confirmBtn").addClass(
-          "bg-gray-300 px-4 py-2 rounded-md cursor-not-allowed opacity-50"
-        );
-        $("#confirmBtn").prop("disabled", true);
-      }
+    // display.value = 100/amtben + "%";
+    $(document).ready(function () {
+      newBeneficiary.forEach(beneficiary => {
+        $benIDIndex = $("#" + beneficiary.divID + " input:first");
+        $benIDIndex.val(100 / amtben + "%");
+        console.log("beneficiary.divID");
+      });
     });
-
     //trash button
 
     var parentContainer = newFormDiv.find('.beneficiaryListDiv');
-parentContainer.append(newFormDiv);
-
-var deleteIcon = newFormDiv.find('.fa-trash');
-deleteIcon.on('click', function () {
-    newFormDiv.remove();
-});
-
-
-
-    plusBtn.addEventListener("click", () => {
-      // Get the current total value
-      if (totalValue < 100) {
-        // Check if total + current value is less than 100
-        currentValue += 1;
-        totalValue += 1;
-        console.log(totalValue + currentValue);
-        console.log("Total Value: " + totalValue);
-        display.textContent = currentValue + "%";
-      } else {
-        console.warn("Cannot add more, total would exceed 100%");
+    parentContainer.append(newFormDiv);
+    $(document).ready(function () {
+    });
+    var deleteIcon = newFormDiv.find('.fa-trash');
+    deleteIcon.on('click', function () {
+      var newFormDivId = newFormDiv.attr("id");
+      firstSpanText = $("#" + newFormDivId + " span:first").text().trim();
+      secondSpanText = $("#" + newFormDivId + " span:last").text().trim();
+      console.log(firstSpanText);
+      console.log(secondSpanText);
+      newFormDiv.remove();
+      amtben--;
+      $(document).ready(function () {
+        newBeneficiary.forEach(beneficiary => {
+          $benIDIndex = $("#" + beneficiary.divID + " input:first");
+          $benIDIndex.val(100 / amtben + "%");
+          console.log("beneficiary.divID");
+        });
+      });
+      if (amtben == 0) {
+        $('#confirmBtn').addClass("hidden");
       }
-      if (totalValue == 100) {
-        $("#confirmBtn").removeClass(
-          "bg-gray-300 px-4 py-2 rounded-md cursor-not-allowed opacity-50"
-        );
-        $("#confirmBtn").removeAttr("disabled");
-      } else {
-        $("#confirmBtn").addClass(
-          "bg-gray-300 px-4 py-2 rounded-md cursor-not-allowed opacity-50"
-        );
-        $("#confirmBtn").prop("disabled", true);
+      if (deletedOptions.length > 0) {
+        deletedOptions.forEach(option => {
+          var foundOption = option.name == firstSpanText && option.relation == secondSpanText;
+          if (foundOption) {
+            console.log("FOUND!");
+            var optionAdding = $('<option></option>');
+            optionAdding.text(option.name + " - " + option.relation);
+            optionAdding.val(option.name);
+            $('#beneficiaryList').append(optionAdding);
+          }
+          deletedOptions = deletedOptions.filter(option => option.name != firstSpanText && option.relation != secondSpanText);
+          newBeneficiary = newBeneficiary.filter(beneficiary => beneficiary.divID != newFormDivId);
+          beneficiaryArray = beneficiaryArray.filter(beneficiary => beneficiary.name != firstSpanText);
+        });
       }
+    });
+
+
+
+
+    $(document).ready(function () {
+      // Add event listener to the input field
+      $(display).on("keyup", function (e) {
+        console.log("Change value");
+      }).on("focus", function () {
+        $(this).parent().css("border", "2px solid #000");
+      }).on("blur", function () {
+        $(this).parent().css("border", "1px solid #000");
+      });
+
     });
   }
 }

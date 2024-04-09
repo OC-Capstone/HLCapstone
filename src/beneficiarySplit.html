@@ -25,6 +25,17 @@
       width: 100%;
       /* other styles... */
     }
+
+    #beneficiaryList::-webkit-scrollbar {
+      display: none;
+    }
+
+    #beneficiaryList {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+    }
   </style>
 </head>
 
@@ -53,8 +64,9 @@
             class="self-stretch h-12 mt-1 px-3 mb-12 py-2 bg-white rounded-none border rounded border-black flex justify-center items-center gap-3">
             + Add New Beneficiary
           </button>
-          <div class="hidden flex-col flex justify-center" id="beneficiaryListDiv">
-            <select id="beneficiaryList" size="3">
+          <div class="hidden flex-col items-center flex justify-center" id="beneficiaryListDiv">
+            <select class="w-1/3 rounded border-gray-300 text-center h-max focus:outline-none shadow p-2"
+              id="beneficiaryList" size="3">
             </select>
             <div class=" flex justify-center">
               <button
@@ -99,9 +111,12 @@
   </div>
 
   <script>
+    var deletedOptions = [];
+    var newBeneficiary = [];
+    var beneficiaryArray = [];
     $(document).ready(function () {
       //function to add a new benficiary to list
-      var beneficiaryArray = [];
+
       function addBeneficiary(name, relation) {
         // Create a new option element
         var option = $('<option></option>');
@@ -114,6 +129,8 @@
         $('#beneficiaryList').append(option);
         $('#beneficiaryListDiv').removeClass("hidden");
       }
+
+
 
       $('#getSelectedOption').click(function () {
         // Get the selected option
@@ -132,8 +149,10 @@
           // Empty object to store beneficiary data
           // Array to store multiple beneficiaries
           var beneficiary = {};
-          // Assign values to properties of the beneficiary object
 
+          deletedOptions.push({ name: selectedName, relation: selectedRelation });
+          // Assign values to properties of the beneficiary object
+          selectedOption.remove();
 
 
           // Push the beneficiary object into the beneficiaryArray
@@ -144,9 +163,9 @@
             split: '',
           });
           $('#confirmBtn').removeClass("hidden");
-          console.log(beneficiaryArray); // Log the beneficiaryArray to the console
-
-
+          console.log("beneficiaryArray: " + beneficiaryArray); // Log the beneficiaryArray to the console
+          console.log("deletedOptions: " + deletedOptions);
+          console.log("newBeneficiary: " + deletedOptions);
 
 
         } else {
@@ -154,6 +173,8 @@
           alert("Please select a beneficiary.");
         }
       });
+
+
       //clicking the add new beneficiary button
       $('#beneficiaryListBTN').click(function () {
         //hiding add new beneficiary button
