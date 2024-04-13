@@ -25,6 +25,8 @@ if ($conn === false) {
     die(print_r(sqlsrv_errors(), true));
 }
 
+
+
 // Fetch the hashed password from the database for comparison
 $sql = "SELECT password FROM USERS WHERE email = ?";
 $params = array($email);
@@ -88,6 +90,7 @@ if (!password_verify($password, $hashedPasswordFromDb)) {
 
             echo $interval->format('%R%a days') . '<br>';
             echo $now->format('Y-m-d H:i:s');
+
         } else {
             echo "Failed to fetch last login!";
         }

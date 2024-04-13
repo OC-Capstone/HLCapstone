@@ -41,10 +41,29 @@
             /* Firefox */
         }
     </style>
+
+    <!-- email match no match -->
+<script>
+    $(document).ready(function () {
+        $("form").submit(function (e) {
+            e.preventDefault();
+            if ($('#email').val() === $('#altemail').val()) {
+                $('#email').val('');
+                $('#email').attr("placeholder", "Emails cannot match");
+                $('#email').addClass('error');
+                $('#altemail').val('');
+                $('#altemail').attr("placeholder", "Emails cannot match");
+                $('#altemail').addClass('error');
+                e.preventDefault();
+            }
+        });
+    });
+</script>
     <script>
         $(document).ready(function () {
             $("form").submit(function (e) {
                 e.preventDefault();
+
                 xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
@@ -63,7 +82,6 @@
                             $('.password').addClass('error');
 
                         } else {
-                            console.log(this.responseText);
                             window.location.href = "login.html";
                         }
                     }
@@ -88,6 +106,7 @@
             });
         });
     </script>
+
 </head>
 
 <body class="bg-gray-100">
@@ -154,6 +173,11 @@
                         href="login.html">
                         Already have an account? Login here.
                     </a>
+                    <div class="flex flex-col font-bold text-sm items-center mt-5">
+                        <h1 style="color: rgb(148, 146, 146);">
+                            Providing a valid email is important <br> you will be using the address to log in.
+                        </h1>
+                    </div>
                 </div>
             </form>
         </div>

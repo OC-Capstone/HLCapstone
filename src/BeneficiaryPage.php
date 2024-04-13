@@ -196,7 +196,7 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
 
           <!-- submit button for, idek anymore -->
           <button type="submit" id="submitBTN" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-auto block mb-12">
-            Submit
+            Save
           </button>
         </form>
 
