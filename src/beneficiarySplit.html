@@ -37,6 +37,7 @@
       /* Firefox */
     }
   </style>
+  <script src="beneficiarySplit.js"></script>
 </head>
 
 <body class="bg-white">
@@ -116,7 +117,8 @@
     var beneficiaryArray = [];
     $(document).ready(function () {
       //function to add a new benficiary to list
-
+      console.log(amtben);
+      console.log(uniqueDisplay);
       function addBeneficiary(name, relation) {
         // Create a new option element
         var option = $('<option></option>');
@@ -137,15 +139,15 @@
         if ($('#beneficiaryList option:selected').length > 0) {
           // Get the selected option
           var selectedOption = $('#beneficiaryList').find('option:selected');
-
           // Get the name and relationship from the selected option
           var selectedName = selectedOption.text().split(' - ')[0]; // Extract name
           var selectedRelation = selectedOption.text().split(' - ')[1]; // Extract relationship
-
+          var selectedId = "";
           // Log the selected name and relationship (you can modify this as needed)
           // What happens when you click GET SELECTED OPTION after clicking a beneficiary in list 
           benSplit(selectedName, selectedRelation);
-
+          console.log(uniqueDisplay);
+          
           // Empty object to store beneficiary data
           // Array to store multiple beneficiaries
           var beneficiary = {};
@@ -156,7 +158,6 @@
 
 
           // Push the beneficiary object into the beneficiaryArray
-
           beneficiaryArray.push({
             name: selectedName,
             relationship: selectedRelation,
@@ -206,9 +207,10 @@
 
       //getselected option from list box.
       $('#confirmBtn').click(function () {
-
+        console.log(beneficiaryArray);
         beneficiaryArray.forEach(beneficiary => {
-          beneficiary.split = parseFloat($(`#display${beneficiaryArray.indexOf(beneficiary) + 2}`).text());
+          beneficiary.split = parseFloat($benIDIndex.val());
+          console.log($benIDIndex.val());
         });
         // Send the data via AJAX
 
@@ -235,7 +237,7 @@
 
     });
   </script>
-  <script src="beneficiarySplit.js"></script>
+
 </body>
 
 </html>
