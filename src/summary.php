@@ -288,6 +288,7 @@ try {
                 <?php endforeach; ?>
 
                 <?php foreach ($data as $beneficiary) : ?>
+                    <?php if ($beneficiary['percentsplit'] > 0) : ?>
                     <!-- Percent Split -->
                     <div class="w-full px-3 py-2 bg-white rounded border border-black grid grid-cols-2 gap-3 mt-4">
                         <!-- Beneficiary Information -->
@@ -323,6 +324,7 @@ try {
                             </div>
                         </div>
                     </div>
+                    <?php endif; ?>
                 <?php endforeach; ?>
 
 

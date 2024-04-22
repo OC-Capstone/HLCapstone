@@ -51,25 +51,81 @@ try {
 						$lastName = $names[count($names) - 1];
 					}
 				}
+				$firstName = trim($firstName);
+				$middleName = trim($middleName);
+				$lastName = trim($lastName);
+				$firstName = strtoupper($firstName);
+				$middleName = strtoupper($middleName);
+				$lastName = strtoupper($lastName);
 
-				// Beneficiary Insert with prepared statement
-				$sql = "INSERT INTO BENEFICIARY (user_id, firstname, middlename, lastname, financialGift) VALUES (?, ?, ?, ?, ?)";
+				// Prepare the SELECT statement
+				$sql = "SELECT * FROM BENEFICIARY WHERE user_id = ? AND firstname = ? AND middlename = ? AND lastname = ?";
 				$stmt = $conn->prepare($sql);
-				$stmt->execute([$user_id, $firstName, $middleName, $lastName, $beneficiary['financialGift']]);
+				$stmt->execute([$user_id, $firstName, $middleName, $lastName]);
 
-				// Get inserted Beneficiary ID
-				$insertedBeneficiaryId = $conn->lastInsertId(); // Assuming auto-incrementing ID
+				// Execute the SELECT statement
+				$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-				// inserting relationship into BeneficiaryRelationship table
-				$sql = "INSERT INTO BeneficiaryRelationship (beneficiary_id, relationshipToDeceased) VALUES (?, ?)";
-				$stmt = $conn->prepare($sql);
-				$stmt->execute([$insertedBeneficiaryId, $beneficiary['relationship']]);
+				// If the beneficiary does not exist, insert a new row
+				if (!$result) {
 
-				// Loop through the beneficiary's gifts and insert them (prepared statements)
-				foreach ($beneficiary['gifts'] as $gift) {
-					$sql = "INSERT INTO GIFT (beneficiary_id, name, giftDetails) VALUES (?, ?, ?)";
+					// Beneficiary Insert with prepared statement
+					$sql = "INSERT INTO BENEFICIARY (user_id, firstname, middlename, lastname, financialGift) VALUES (?, ?, ?, ?, ?)";
 					$stmt = $conn->prepare($sql);
-					$stmt->execute([$insertedBeneficiaryId, $gift['name'], $gift['details']]);
+					$stmt->execute([$user_id, $firstName, $middleName, $lastName, $beneficiary['financialGift']]);
+
+					// Get inserted Beneficiary ID
+					$insertedBeneficiaryId = $conn->lastInsertId(); // Assuming auto-incrementing ID
+
+					// inserting relationship into BeneficiaryRelationship table
+					$sql = "INSERT INTO BeneficiaryRelationship (beneficiary_id, relationshipToDeceased) VALUES (?, ?)";
+					$stmt = $conn->prepare($sql);
+					$stmt->execute([$insertedBeneficiaryId, $beneficiary['relationship']]);
+
+					// Loop through the beneficiary's gifts and insert them (prepared statements)
+					foreach ($beneficiary['gifts'] as $gift) {
+						$sql = "INSERT INTO GIFT (beneficiary_id, name, giftDetails) VALUES (?, ?, ?)";
+						$stmt = $conn->prepare($sql);
+						$stmt->execute([$insertedBeneficiaryId, $gift['name'], $gift['details']]);
+					}
+				} else {
+					// Beneficiary Insert with prepared statement
+					$sql = "UPDATE BENEFICIARY SET financialGift = ? WHERE firstname = ? AND middlename = ? AND lastname = ?";
+					$stmt = $conn->prepare($sql);
+					$stmt->execute([$beneficiary['financialGift'], $firstName, $middleName, $lastName]);
+
+					// Get inserted Beneficiary ID
+					$sql = "SELECT id FROM BENEFICIARY WHERE user_id = ? AND firstname = ? AND middlename = ? AND lastname = ?";
+					$stmt = $conn->prepare($sql);
+					$stmt->execute([$user_id, $firstName, $middleName, $lastName]);
+					$result = $stmt->fetch(PDO::FETCH_ASSOC);
+					$beneficiaryId = $result['id'];
+					// inserting relationship into BeneficiaryRelationship table
+					$sql = "UPDATE BeneficiaryRelationship SET relationshipToDeceased = ? where beneficiary_id = ?";
+					$stmt = $conn->prepare($sql);
+					$stmt->execute([$beneficiary['relationship'], $beneficiaryId]);
+
+
+
+
+					foreach ($beneficiary['gifts'] as $gift) {
+						// Prepare the SELECT statement
+						$sql = "SELECT * FROM GIFT WHERE beneficiary_id = ? AND name = ?";
+						$stmt = $conn->prepare($sql);
+						$stmt->execute([$beneficiaryId, $gift['name']]);
+
+						$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+						if (!$result) {
+							$sql = "INSERT INTO GIFT (beneficiary_id, name, giftDetails) VALUES (?, ?, ?)";
+							$stmt = $conn->prepare($sql);
+							$stmt->execute([$beneficiaryId, $gift['name'], $gift['details']]);
+						} else {
+							$sql = "UPDATE GIFT SET giftDetails = ? WHERE name = ?";
+							$stmt = $conn->prepare($sql);
+							$stmt->execute([$gift['details'], $gift['name']]);
+						}
+					}
 				}
 			}
 

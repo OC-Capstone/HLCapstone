@@ -1,6 +1,8 @@
 var id = 1;
 var totalValue = 0;
 var amtben = 0;
+var uniqueDisplay = "";
+var $benIDIndex;
 function benSplit(name, relationship) {
   // Generate a unique ID
   amtben++;
@@ -8,7 +10,7 @@ function benSplit(name, relationship) {
   id++;
   var uniqueIdName = Math.random().toString(36).substr(2, 9);
   var uniqueIdRelationship = Math.random().toString(36).substr(2, 9);
-  var uniqueDisplay = `display${id}`;
+    uniqueDisplay = `display${id}`;
   var newFormDiv = $("<div></div>");
 
   newFormDiv.addClass("w-full").attr("id", uniqueId);
@@ -80,19 +82,18 @@ class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 w-full px-3 py-2 bg-white roun
   $("#" + uniqueIdRelationship).html(relationship);
   var firstSpan;
   var secondSpan;
-  var $benIDIndex;
+  
   splitButtons(uniqueDisplay, id);
   newBeneficiary.push({ divID: uniqueId });
-  function splitButtons(minusBtnId, displayId, plusBtnId) {
+  function splitButtons(displayId) {
     const display = document.getElementById(displayId);
-    const minusBtn = document.getElementById(minusBtnId);
-    const plusBtn = document.getElementById(plusBtnId);
     var currentValue = 0;
     // display.value = 100/amtben + "%";
     $(document).ready(function () {
       newBeneficiary.forEach(beneficiary => {
         $benIDIndex = $("#" + beneficiary.divID + " input:first");
         $benIDIndex.val(100 / amtben + "%");
+        console.log($benIDIndex.val());
         console.log("beneficiary.divID");
       });
     });

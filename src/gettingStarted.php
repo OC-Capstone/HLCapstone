@@ -21,7 +21,7 @@ session_start();
         <?php
         include("navbar.html");
         ?>
-    </div class="">
+    </div>
     <!-- Container -->
     <div>
         <!-- Header -->

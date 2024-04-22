@@ -288,63 +288,65 @@ try {
                 <?php endforeach; ?>
 
                 <?php foreach ($data as $beneficiary) : ?>
-                    <!-- Percent Split -->
-                    <div class="w-full px-3 py-2 bg-white rounded border border-black grid grid-cols-2 gap-3 mt-4">
-                        <!-- Beneficiary Information -->
-                        <div class="col-span-2 bg-green-200 rounded flex justify-center gap-1.5">
-                            <div class="text-black text-2xl font-normal font-['Inter'] leading-10">Beneficiary</div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="h-24 px-3 py-2 bg-white flex items-center">
-                                <img src="../res/prof_pic.png" alt="Profile Picture" class="h-full w-full object-contain">
+                    <?php if ($beneficiary['percentsplit'] > 0) : ?>
+                        <!-- Percent Split -->
+                        <div class="w-full px-3 py-2 bg-white rounded border border-black grid grid-cols-2 gap-3 mt-4">
+                            <!-- Beneficiary Information -->
+                            <div class="col-span-2 bg-green-200 rounded flex justify-center gap-1.5">
+                                <div class="text-black text-2xl font-normal font-['Inter'] leading-10">Beneficiary</div>
                             </div>
-                            <div class="ml-2">
-                                <div>
-                                    <span class="text-lg md:text-xl lg:text-2xl">
-                                        <?php echo $beneficiary['firstname'] . " " . $beneficiary['middlename'] . " " . $beneficiary['lastname']; ?>
-                                    </span>
+                            <div class="flex items-center">
+                                <div class="h-24 px-3 py-2 bg-white flex items-center">
+                                    <img src="../res/prof_pic.png" alt="Profile Picture" class="h-full w-full object-contain">
                                 </div>
-                                <div>
-                                    <span class="text-md md:text-lg lg:text-xl"><?php echo $beneficiary['relationshipToDeceased']; ?></span>
+                                <div class="ml-2">
+                                    <div>
+                                        <span class="text-lg md:text-xl lg:text-2xl">
+                                            <?php echo $beneficiary['firstname'] . " " . $beneficiary['middlename'] . " " . $beneficiary['lastname']; ?>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="text-md md:text-lg lg:text-xl"><?php echo $beneficiary['relationshipToDeceased']; ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-end items-center">
+                                <div class="ml-2">
+                                    <div class="text-md md:text-md lg:text-lg text-center">
+                                        Residue of Estate
+                                    </div>
+                                    <div class="text-sm md:text-sm lg:text-md text-center items-center justify-center italic">
+                                        After Gifting
+                                    </div>
+                                    <div class="font-bold text-md md:text-lg lg:text-xl bg-yellow-200 text-center bg-opacity-10 rounded shadow border border-black border-opacity-0 justify-center items-center  py-2 px-4">
+                                        <?php echo round($beneficiary['percentsplit']) . '%'; ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="flex justify-end items-center">
-                            <div class="ml-2">
-                                <div class="text-md md:text-md lg:text-lg text-center">
-                                    Residue of Estate
-                            </div>
-                            <div class="text-sm md:text-sm lg:text-md text-center items-center justify-center italic">
-                                After Gifting
-                            </div>
-                            <div class="font-bold text-md md:text-lg lg:text-xl bg-yellow-200 text-center bg-opacity-10 rounded shadow border border-black border-opacity-0 justify-center items-center  py-2 px-4">
-                                <?php echo round($beneficiary['percentsplit']) . '%'; ?>
-                            </div>
-                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
+
+            </div>
+            <div class="sticky footer w-full h-32 bg-white flex"> <!-- Adjusted footer class -->
+                <div class=" bottom-0  inset-x-0 w-full h-32 flex justify-center grid grid-cols-2 gap-4 bg-white">
+                    <!-- Column One -->
+                    <div class="flex items-center justify-center">
+                        <button id="print-will-button" class="bg-green-500 hover:bg-green-700 h-1/2 w-1/2 text-white font-bold py-2 px-4 border border-green-700 rounded-lg">
+                            Print Will
+                        </button>
                     </div>
-            </div>
-        <?php endforeach; ?>
+                    <!-- Column Three -->
+                    <div class="flex items-center justify-center">
+                        <button class="bg-yellow-500 hover:bg-yellow-700 h-1/2 w-1/2 text-white font-bold py-2 px-4 border border-yellow-700 rounded-lg">
+                            Edit Will
+                        </button>
+                    </div>
 
-
-        </div>
-        <div class="sticky footer w-full h-32 bg-white flex"> <!-- Adjusted footer class -->
-            <div class=" bottom-0  inset-x-0 w-full h-32 flex justify-center grid grid-cols-2 gap-4 bg-white">
-                <!-- Column One -->
-                <div class="flex items-center justify-center">
-                    <button id="print-will-button" class="bg-green-500 hover:bg-green-700 h-1/2 w-1/2 text-white font-bold py-2 px-4 border border-green-700 rounded-lg">
-                        Print Will
-                    </button>
                 </div>
-                <!-- Column Three -->
-                <div class="flex items-center justify-center">
-                    <button class="bg-yellow-500 hover:bg-yellow-700 h-1/2 w-1/2 text-white font-bold py-2 px-4 border border-yellow-700 rounded-lg">
-                        Edit Will
-                    </button>
-                </div>
-
             </div>
         </div>
-    </div>
 
     </div>
 

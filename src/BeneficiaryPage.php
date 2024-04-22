@@ -107,20 +107,24 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
           $(this).find(".gift").each(function() {
             var giftName = $(this).find("#giftName").val();
             var giftDetails = $(this).find("#giftDetails").val();
-
-            gifts.push({
-              name: giftName,
-              details: giftDetails
+            if (giftName && giftDetails) {
+              gifts.push({
+                name: giftName,
+                details: giftDetails
+              });
+            }
+          });
+          if (name && relationship) {
+            beneficiaries.push({
+              id: beneficiaryId,
+              name: name,
+              relationship: relationship,
+              financialGift: financialGift,
+              gifts: gifts
             });
-          });
-
-          beneficiaries.push({
-            id: beneficiaryId,
-            name: name,
-            relationship: relationship,
-            financialGift: financialGift,
-            gifts: gifts
-          });
+          } else {
+            alert("Please fill in all fields for beneficiaries");
+          }
         });
 
         // Prepare data to send (beneficiaries object)
@@ -159,71 +163,72 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
 
 
 <body class="bg-white font-sans">
-  <div id="mySidenav" class="sidenav">
+  <div id="mySidenav" class="sidenav z-40">
     <?php
     include("navbar.html");
     ?>
-  </div class="">
-  <div id="mySidenav" class="sidenav">
   </div>
   <!-- Container -->
-  <div>
-    <!-- Header -->
-    <div class="fixed top-0 left-0 w-full h-16 bg-red-600 flex justify-between items-center px-4 z-10">
-      <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-      <div id="title" class="text-white font-lato font-bold text-shadow-md text-2xl sm:text-4xl md:text-4xl" style="font-family: 'Lato', sans-serif; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
-        Testamentary Wishes
-      </div>
-      <a href="#">
-        <i class="fa-solid fa-trash text-white text-4xl"></i>
-      </a>
+
+  <!-- Header -->
+  <div class="fixed top-0 left-0 w-full h-16 bg-red-600 flex justify-between items-center px-4 z-10">
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+    <div id="title" class="text-white font-lato font-bold text-shadow-md text-2xl sm:text-4xl md:text-4xl" style="font-family: 'Lato', sans-serif; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
+      Testamentary Wishes
+    </div>
+    <a href="#">
+      <i class="fa-solid fa-trash text-white text-4xl"></i>
+    </a>
+  </div>
+
+  <div class="mx-4 items-center mt-20 h-full">
+
+    <div id="main_div" class="flex flex-col justify-between pb-32">
+      <form id="beneficiaryForm" class="flex-grow">
+        <div class="w-full px-3 py-2 bg-white flex flex-col justify-center items-center ">
+          <div class="w-full rounded flex justify-center">
+          </div>
+
+          <!--important button-->
+
+          <button type="button" id="addGuardianButton" class="self-stretch h-12 mt-1 px-3 mb-12 py-2 bg-white rounded-none border border-black flex justify-center items-center gap-3">
+            + Add New Gift Beneficiary
+
+          </button>
+        </div>
+        <button type="submit" id="submitBTN" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-auto block mb-12">
+          Save
+        </button>
+      </form>
+
+      <!-- submit button for, idek anymore -->
+
     </div>
 
-    <div class="mx-4 items-center mt-20 h-full">
-      <div id="main_div">
-        <form id="beneficiaryForm">
-          <div class="w-full px-3 py-2 bg-white flex flex-col justify-center items-center ">
-            <div class="w-full rounded flex justify-center">
+    <!--footer-->
+    <!-- Footer -->
 
-            </div>
+    <div class="fixed bottom-0 w-full h-32 bg-white flex">
+      <div class=" w-full h-32 flex justify-center grid grid-cols-3 gap-4 bg-white">
+        <div class="flex items-center justify-center">
+          <a href="dashboard.php">
+            <img src="../res/iconsHL/arrow_back.png" width="150px" height="100px">
+          </a>
+        </div>
 
-            <!--important button-->
-
-            <button type="button" id="addGuardianButton" class=" self-stretch h-12 mt-1 px-3 mb-12 py-2 bg-white rounded-none border border-black flex justify-center items-center gap-3">
-              + Add New Gift Beneficiary
-            </button>
+        <div class="flex flex-col">
+          <div class="h-3/4 flex items-center justify-center" style="background-image: url('../res/iconsHL/step3.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
           </div>
-
-          <!-- submit button for, idek anymore -->
-          <button type="submit" id="submitBTN" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-auto block mb-12">
-            Save
-          </button>
-        </form>
-
-        <!--footer-->
-        <!-- Footer -->
-        <div class="fixed bottom-0 w-full h-32 bg-white flex">
-          <div class=" w-full h-32 flex justify-center grid grid-cols-3 gap-4 bg-white">
-            <div class="flex items-center justify-center">
-              <a href="dashboard.php">
-                <img src="../res/iconsHL/arrow_back.png" width="150px" height="100px">
-              </a>
-            </div>
-
-            <div class="flex flex-col">
-              <div class="h-3/4 flex items-center justify-center" style="background-image: url('../res/iconsHL/step3.png'); background-size: contain; background-repeat: no-repeat; background-position: center;">
-              </div>
-            </div>
-            <div class="flex items-center justify-center">
-              <a id='nextbtn' href="questionPage.php">
-                <img src="../res/iconsHL/arrow_next.png" width="150px" height="100px">
-              </a>
-            </div>
-          </div>
+        </div>
+        <div class="flex items-center justify-center">
+          <a id='nextbtn' href="questionPage.php">
+            <img src="../res/iconsHL/arrow_next.png" width="150px" height="100px">
+          </a>
         </div>
       </div>
     </div>
   </div>
+
 
   <script>
     function openNav() {
@@ -246,13 +251,14 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
 
 
   <script>
-    document.getElementById('addGuardianButton').addEventListener('click', function() {
-      var uniqueId = Math.random().toString(36).substr(2, 9);
-      var newFormDiv = document.createElement('div');
-      newFormDiv.classList.add('beneficiary', 'w-full', 'px-3', 'py-2', 'bg-white', 'rounded', 'border', 'border-black', 'flex-col', 'gap-3', 'mt-4', 'mb-12', 'top-10', 'relative');
-      newFormDiv.setAttribute('data-id', uniqueId);
-      newFormDiv.innerHTML = `
-
+    var newFormDiv;
+    $(document).ready(function() {
+      $('#addGuardianButton').click(function() {
+        var uniqueId = Math.random().toString(36).substr(2, 9);
+        var newFormDiv = $('<div>')
+          .addClass('beneficiary w-full px-3 py-2 bg-white rounded border border-black flex-col gap-3 mt-4 mb-12 top-10 relative')
+          .attr('data-id', uniqueId);
+        $(newFormDiv).html(`
         <div class=" flex w-full items-center">
             <div class=" w-full  h-24 px-3 py-2  bg-white flex items-center">
                 <img src="../res/prof_pic.png" alt="Profile Picture" class="h-full object-contain">
@@ -276,7 +282,7 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
         </div>
 
         <!-- Financial Gifts -->
-        <div class="w-full h-full px-3 py-2 bg-white rounded border border-black justify-start items-center gap-3 inline-flex  mb-1"> 
+        <div class="w-full px-3 py-2 bg-white rounded border border-black justify-start items-center gap-3 inline-flex  mb-1"> 
             <img class="w-5 h-5 items-start" src="../res/iconsHL/cash.png">
             <div class="grow shrink basis-0 text-stone-950 text-base font-normal leading-normal w-full">
                 Financial Gifts:</div>
@@ -308,21 +314,22 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
             </div>
         </div>
         <button type="button" class="self-stretch h-12 w-full mt-4 py-2 bg-white rounded-none border border-black flex justify-center items-center gap-3 addGiftButton">+ Add New Gift</button> <!--Do Not touch! you'll break everything-->
-    </div>`;
+    </div>`);
 
-      var parentElement = this.parentElement;
-      parentElement.insertBefore(newFormDiv, this);
+        var parentElement = $('#main_div');
+        parentElement.before(newFormDiv);
 
-      var deleteIcon = newFormDiv.querySelector('.fa-trash');
-      deleteIcon.addEventListener('click', function() {
-        parentElement.removeChild(newFormDiv);
-      });
+        // var deleteIcon = newFormDiv.querySelector('.fa-trash');
+        // deleteIcon.addEventListener('click', function() {
+        //   parentElement.removeChild(newFormDiv);
+        // });
 
-      var addGiftButton = newFormDiv.querySelector('.addGiftButton');
-      addGiftButton.addEventListener('click', function() {
-        var newGiftDiv = document.createElement('div');
-        newGiftDiv.classList.add('gift', 'w-full', 'h-full', 'px-3', 'py-2', 'bg-white', 'rounded', 'border', 'border-black', 'justify-start', 'items-start', 'gap-3', 'inline-flex', 'mb-1', 'relative');
-        newGiftDiv.innerHTML = `
+        var addGiftButton = $('.addGiftButton', newFormDiv);
+
+        addGiftButton.on('click', function() {
+          var newGiftDiv = $('<div/>')
+            .addClass('gift w-full h-full px-3 py-2 bg-white rounded border border-black justify-start items-start gap-3 inline-flex mb-1 relative')
+            .html(`
           
             <i class="fas fa-trash text-black text-lg absolute top-0 right-0 mr-1 cursor-pointer"></i> <!-- Delete icon positioned top right -->
             <img class="w-5 h-5" src="../res/iconsHL/gift.png">
@@ -331,13 +338,14 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
                 <input type="text" id="giftName" placeholder="Gift Name" class="w-1/2 text-md md:text-lg  ml-6 mb-6 lg:text-xl border-b-2 border-gray-400 focus:outline-none focus:border-blue-500">
                 <p class="text-gray-700 font-sm w-full">Details:</p>
                 <textarea id="giftDetails" placeholder="Gift Details" class="resize-y w-1/2 text-md md:text-lg ml-6 lg:text-xl border-b-2 border-gray-400 focus:outline-none focus:border-blue-500"></textarea>
-            </div>`;
-        var parentContainer = newFormDiv.querySelector('.giftDetails');
-        parentContainer.appendChild(newGiftDiv);
+            </div>`);
+          var parentContainer = $(newFormDiv).find('.giftDetails');
+          parentContainer.append(newGiftDiv);
 
-        var deleteIcon = newGiftDiv.querySelector('.fa-trash');
-        deleteIcon.addEventListener('click', function() {
-          parentContainer.removeChild(newGiftDiv);
+          var deleteIcon = $(newGiftDiv).find('.fa-trash');
+          deleteIcon.on('click', function() {
+            $(newGiftDiv).remove();
+          });
         });
       });
     });

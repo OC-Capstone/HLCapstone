@@ -30,7 +30,17 @@ try {
             }
 
             $conn->beginTransaction();
+            foreach ($beneficiaries as $beneficiary) {
+                // Beneficiary Insert with prepared statement
+                $sql = "UPDATE BENEFICIARY SET percentSplit = 0 WHERE user_id = ?";
 
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([$user_id]);
+            }
+
+            $conn->commit();
+            
+            $conn->beginTransaction();
             foreach ($beneficiaries as $beneficiary) {
                 $name = $beneficiary["name"];
                 $relationship = $beneficiary["relationship"];
