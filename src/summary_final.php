@@ -176,7 +176,7 @@ try {
                 Testamentary Wishes
             </div>
             <a href="#">
-                <i class="fa-solid fa-trash text-white text-4xl"></i>
+
             </a>
         </div>
 
@@ -223,6 +223,9 @@ try {
                 <?php foreach ($data as $beneficiary) : ?>
                     <div class="w-full px-3 py-2 bg-white rounded border border-black flex-col gap-3 inline-flex mt-4">
                         <!-- Beneficiary Information -->
+                        <div class="w-full bg-green-200  rounded justify-center gap-1.5 inline-flex">
+                            <div class="text-black text-2xl font-normal font-['Inter'] leading-10">Gift Beneficiary</div>
+                        </div>
                         <div class="flex items-center">
                             <div class="h-24 px-3 py-2 bg-white flex items-center">
                                 <img src="../res/prof_pic.png" alt="Profile Picture" class="h-full w-full object-contain">
