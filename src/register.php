@@ -14,10 +14,12 @@ $altEmail = $_POST['altemail'];
 $password = $_POST['password'];
 $verifypassword = $_POST['confirmpassword'];
 
-if ($password != $verifypassword) {
+
+if ($password != $verifypassword && $email != $altEmail) {
 	echo "pass";
 	exit();
 }
+
 
 try {
 	$conn = new PDO("sqlsrv:server = tcp:hergott.database.windows.net,1433; Database = Hergott", $DBUSER, $DBPASS);
@@ -44,13 +46,13 @@ if (sqlsrv_begin_transaction($conn) === false) {
 }
 
 /* check if user exists */
-$sql = "SELECT email 
-		FROM USERS WHERE email = ?";
-$params = array($email);
+$sql = "SELECT email FROM USERS WHERE email = ? OR altemail = ?";
+$params = array($email, $altEmail);
 $options =  array("Scrollable" => SQLSRV_CURSOR_KEYSET);
 /* ^ idk what SQLSRV_CURSOR_KEYSET does lol */
 $userExists = sqlsrv_query($conn, $sql, $params, $options);
 $row_count = sqlsrv_num_rows($userExists);
+
 
 /* If the number of rows that match the query is 0, then the user does not exist */
 if ($row_count == 0) {
@@ -76,6 +78,7 @@ if ($row_count == 0) {
 	$sql = "UPDATE USERS SET last_login = GETDATE() WHERE email = ?";
 	$params = array($email);
 	$stmt = sqlsrv_query($conn, $sql, $params);
+
 
 	// Back to login page on register success.
 	header("Location: login.html");

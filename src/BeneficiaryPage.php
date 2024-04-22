@@ -193,10 +193,11 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'Benefic
 
           <button type="button" id="addGuardianButton" class="self-stretch h-12 mt-1 px-3 mb-12 py-2 bg-white rounded-none border border-black flex justify-center items-center gap-3">
             + Add New Gift Beneficiary
+
           </button>
         </div>
         <button type="submit" id="submitBTN" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-auto block mb-12">
-          Submit
+          Save
         </button>
       </form>
 
